@@ -1,0 +1,92 @@
+.row {
+    margin: 0 !important;
+}
+
+body {
+    background: black;
+    padding-top: 30px;
+}
+
+.panel-heading {
+    background: #1D4DA2;
+    padding: 5px 15px !important;
+}
+
+.panel-heading h1 {
+    font-size: 30px;
+    margin-top: 0px;
+}
+
+.panel {
+    background-color: white;
+    border-radius: 2px;
+    margin-top: 50px;
+    color: white;
+}
+
+.input-group-addon {
+    border-radius: 0 !important;
+}
+
+input {
+    border-radius: 0 !important;
+}
+
+.panel-footer {
+    padding-left: 30px !important;
+    background-color: white !important;
+    border-top: 0 !important;
+}
+
+.panel-footer .label-checkbox {
+    color: grey !important;
+    margin-left: 10px;
+}
+
+.panel-body {
+    line-height: 35px;
+    padding: 30px;
+}
+
+label {
+    color: #000000;
+}
+
+.panel-heading {
+    text-align: center;
+}
+
+.btn-custom {
+    margin-right: 30px;
+}
+
+.btn-link {
+    padding: 0;
+    margin-top: 20px;
+}
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.remember-login {
+    float: right;
+    right: 30px;
+}
+
+input[type="text"], input[type="password"] {
+    padding-right: 25px;
+    border-radius: 2px !important;
+}
+
+.input-group-addon {
+    position: relative;
+    right: 40px;
+    z-index: 100;
+    border: none;
+    background-color: transparent;
+    color: #757575;
+}

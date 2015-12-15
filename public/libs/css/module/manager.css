@@ -1,0 +1,25 @@
+table {
+    font-size: 14px;
+}
+
+th {
+    border-bottom: 0 !important;
+}
+
+td span {
+    padding: 6px;
+    margin-left: 2px;
+    border: 1px solid;
+}
+
+span.glyphicon.glyphicon-pencil {
+    color: gray;
+}
+
+span.glyphicon.glyphicon-ok {
+    color: #089C08;
+}
+
+span.glyphicon.glyphicon-remove {
+    color: #C30B0B;
+}

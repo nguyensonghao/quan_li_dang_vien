@@ -1,0 +1,380 @@
+ .nav-pills > li {
+    float: none !important;
+  }
+
+  .style-search li{
+    background: white;
+  }
+
+  li.list-group-item {
+    padding: 2px;
+    border-radius: 0 !important;
+  }
+
+  textarea {
+    border-radius: 0 !important;
+  }
+
+  li.list-group-item a {
+    border-radius: 0 !important;
+  }
+
+  .content-search-advance {
+    padding: 10px;
+    height: 100%;
+    padding-top: 4px;
+  }
+
+  .content-search-advance .content {
+    border: 1px solid #ECECEC;
+    padding: 10px;
+    overflow: auto;
+    background: #F7F8FA
+  }
+
+  .list-information .active a{
+    background: #e6e6e6 !important;
+    color: black !important;
+  }
+
+  .list-information .active a:hover {
+    background: #e6e6e6 !important;
+    color: black !important;
+  }
+
+  th {
+    border: 0px !important;
+    color: black;
+  }
+
+  .list-title {
+    color: black;
+    text-align: center;
+    border-bottom: 0 !important;
+    padding: 6px !important;
+    text-align: left;
+    font-size: 12px;
+    overflow: auto;
+    border: 1px solid #ccc !important;
+    margin-left: 2px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+  }
+
+  .list-title .information {
+    float: right;
+  }
+
+  .list-title .information li {
+    list-style: none;
+  }
+
+  .list-title .information ul {
+    padding: 0;
+  }
+
+  .form-control {
+    border-radius: 2px !important;
+  }
+
+  .list-title .img {
+    float: left;
+    margin-bottom: 20px;
+  }
+
+  .content-body {
+    padding: 20px;
+  }
+
+  .style-search {
+    padding: 0px;
+  }
+
+  li.list-group-item {
+    padding: 0px;
+}
+
+  .style-search .nav > li > a {
+    padding: 2px !important;
+    border: 1px solid #DEDEDE;
+    border-bottom: 0;
+    color: black;
+    border-radius: 0px;
+    font-size: 12px;
+  }
+  
+  li.list-group-item.active {
+    border-color: #ccc;
+  }
+
+  li.list-group-item.active a {
+    background: #eee !important;
+    color: black !important;
+  }
+
+  .tab-content {
+    height: 40%;
+  }
+
+  .btn-print {
+    margin-top: 20px;
+    position: static;
+    clear: both;
+  }
+
+  li.title {
+    background: #a94442;
+    color: white;
+    padding: 6px;
+    text-align: center;
+  }
+
+  .content-body {
+    padding-top: 5px;
+  }
+
+  .col-md-6 {
+    padding: 0px;
+  }
+
+  .content-search-advance {
+    background: white;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  td {
+    padding: 4px !important;
+    text-align: center;
+    background: white;
+    border-color: #DCE0E6 !important;
+  }
+
+  td .btn {
+    height: 25px;
+    line-height: 15px;
+  }
+
+  thead {
+    background: white !important;
+    /*border-color: #2A3F54 !important;*/
+  }
+
+  /*thead td {
+    color: white !important;
+  }*/
+
+  .new {
+    padding: 10px;
+    background-color: white;
+    box-shadow: 1px 1px 0 rgba(199, 196, 191, 0.62), 1px 1px 3px rgba(210, 207, 202, 0.73);
+  }
+
+  .title-text {
+    margin: -10px;
+    margin-bottom: 0px;
+    padding: 10px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-right: none;
+    text-transform: uppercase;
+  }
+
+  .col-md-6 {
+    padding: 15px;
+  }
+
+  .col-md-6 label {
+    margin-top: 12px;
+  }
+
+  th, td, label {
+    font-size: 13px !important;
+  }
+
+  thead th {
+    text-transform: uppercase;
+  }
+
+  .btn-register {
+    background: #31af64;
+    border-color: #31af64;
+    border-radius: 1px;
+    text-transform: uppercase;
+    font-size: 14px;
+    min-width: 100px;
+  }
+
+  .btn-register:hover {
+    background: #31af64;
+    border-color: #31af64;
+    color: #E5E6E6 !important;
+  }
+
+  .title-page .title{
+    margin: -10px !important;
+    margin-bottom: 10px !important;
+    background: white;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400 !important;
+    font-family: Helvetica;
+    text-transform: uppercase;
+    padding-left: 10px;
+  }
+
+  .title-page .username {
+    color: #C34936;
+    /*font-weight: bold;*/
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  .title-text {
+    background: #A94442;
+    border: 1px solid #A94442;
+    color: white;
+  }
+
+  span.chibo {
+    color: #404040;
+    font-style: italic;
+  }
+  
+  .no-padding {
+    padding: 0 !important;
+    padding-right: 10px !important
+  }
+
+  input[type="number"] {
+    width: 100%;
+  }
+
+  .with-150 {
+    width: 150px !important;
+  }
+
+  .with-80 {
+    width: 78px;
+  }
+  
+  .form-control {
+    padding: 0;
+    height: 28px;
+    border-radius: 0px !important;
+    padding-left: 6px !important;
+  }
+
+  .btn-print:hover {
+    background: #253954 !important;
+    color: white !important;
+  }
+
+  .btn-print {
+    color: white !important
+  }
+
+  .content-search-advance .content {
+    overflow: visible;
+    height: 100%;
+  }
+
+   tr {
+        border: none !important;
+    }
+
+    .thongtinchung button {
+        margin-left: 10px !important;
+    }
+
+    .thongtinchung .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border: none !important;    
+    }
+    
+    .thongtinchung .menu-add-member {
+        margin-left: -55px !important;
+    }
+
+    .thongtinchung .menu-add-member li{
+        float: left;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-top: 0 !important;
+    }
+
+    .thongtinchung td {
+      text-align: left;
+    }
+
+    .thongtinchung .menu-active {
+        background: #337ab7 !important;
+        border-color: #337ab7 !important;
+        color: white !important;
+    }
+
+    .thongtinchung .menu-add-member a {
+        color: #33333F;
+    }
+
+    .thongtinchung textarea {
+        height: 25px;
+        width: 200px;
+    }
+
+    .thongtinchung {
+      background: white !important
+    }
+
+    .thongtinchung label {
+      font-weight: 400;
+      font-size: 12px !important;
+    }
+
+    .thongtinchung input[type="date"] {
+        font-size: 12px;
+        height: 18px !Important;
+    }
+
+    .thongtinchung input {
+      height: 18px;
+      font-size: 12px;
+    }
+
+    .thongtinchung select {
+      font-size: 12px;
+    }
+
+   /* select {
+        height: 23px;
+    }*/
+
+    .thongtinchung label {
+        /*font-weight: 100 !important;*/
+        color: black;
+        font-size: 12px;
+        min-width: 150px;
+        max-width: 153px;
+        margin-right: 10px !important;
+    }
+
+    .thongtinchung td {
+        max-width: 300px;
+        min-width: 200px;
+        padding-bottom: 0px !important;
+    }
+    
+    .thongtinchung .alert {
+        clear: both;
+        margin-top: 50px;
+    }
+
+    .thongtinchung button {
+      height: 20px;
+      line-height: 10px;
+    }
+
+    .thongtinchung .btn-save, .thongtinchung .btn-reset {
+      height: 25px;
+    }

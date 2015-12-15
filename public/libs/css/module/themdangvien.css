@@ -1,0 +1,77 @@
+ tr {
+        border: none !important;
+    }
+
+/*    input[type="date"] {
+        line-height: 10px !important;
+    }*/
+
+/*    label {
+        width: 140px;
+    }*/
+
+/*    input {
+        width: 150px !important;
+    }*/
+
+    button {
+        margin-left: 10px !important;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border: none !important;    
+    }
+    
+    .menu-add-member {
+        margin-left: -55px !important;
+    }
+
+    .menu-add-member li{
+        float: left;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-top: 0 !important;
+    }
+
+    .menu-active {
+        background: #337ab7 !important;
+        border-color: #337ab7 !important;
+        color: white !important;
+    }
+
+    .menu-add-member a {
+        color: #33333F;
+    }
+
+    textarea {
+        height: 25px;
+        width: 200px;
+    }
+
+    input[type="date"] {
+        height: 25px;
+    }
+
+   /* select {
+        height: 23px;
+    }*/
+
+    label {
+        /*font-weight: 100 !important;*/
+        color: black;
+        font-size: 12px;
+        min-width: 150px;
+        max-width: 153px;
+        margin-right: 10px !important;
+    }
+
+    td {
+        max-width: 400px;
+        min-width: 200px;
+        padding-bottom: 0px !important;
+    }
+    
+    .alert {
+        clear: both;
+        margin-top: 50px;
+    }

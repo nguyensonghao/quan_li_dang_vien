@@ -1,0 +1,16 @@
+.alert {
+    margin-bottom: 0;
+}
+
+.group-button-toolbar {
+    float: right;
+}
+
+.group-button-toolbar span {
+    margin-left: 20px;
+    color: #0E8C0E
+}
+
+.group-button-toolbar .glyphicon-remove {
+    color: #D60505
+}

@@ -1,0 +1,88 @@
+.nav-pills > li {
+    float: none !important;
+  }
+
+  li.list-group-item {
+    padding: 2px;
+    border-radius: 0 !important;
+  }
+
+  textarea {
+    border-radius: 0 !important;
+  }
+
+  li.list-group-item a {
+    border-radius: 0 !important;
+  }
+
+  .content-search-advance {
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: 100%;
+  }
+
+  .active a{
+    background: gray !important;
+  }
+
+  .list-title {
+    background: #337AB7 !important;
+    color: white;
+    text-align: center;
+    border: 2px solid #CAC8C8 !important;
+    border-bottom: 0 !important;
+    padding: 6px !important;
+    font-style: italic;
+  }
+
+  .content-body {
+    height: 550px;
+    padding: 20px;
+  }
+
+  .style-search {
+    height: 450px;
+    overflow: auto;
+  }
+
+  li.list-group-item {
+    padding: 0px;
+}
+
+  .style-search .nav > li > a {
+    padding: 6px !important;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    color: #131313;
+    font-size: 13px;
+  }
+  
+  li.list-group-item.active {
+    border-color: #ccc;
+  }
+
+  li.list-group-item.active a {
+    background: #eee !important;
+    color: black !important;
+  }
+
+  .tab-content {
+    height: 40%;
+  }
+
+  select {
+    height: 25px;
+  }
+
+  textarea {
+    color: black !important;
+    font-size: 13px !important;
+  }
+
+  .style-search {
+    height: 100%;
+  }
+
+  .searcg-log {
+    font-size: 15px !important;
+  }

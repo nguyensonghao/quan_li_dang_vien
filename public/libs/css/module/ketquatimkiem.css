@@ -1,0 +1,74 @@
+input[type="number"] {
+    width: 80px !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.sex {
+    margin-left: 100px;
+    position: absolute;
+    top: 0px;
+    left: 40px;
+}
+
+.sex .radio {
+    float: left;
+    margin: 0 !important;
+}
+
+.btn-search {
+    margin-right: 100px !important;
+}
+
+.title {
+    text-align: left !important;
+    margin-left: 15px;
+}
+
+.number-result-search p {
+    text-align: left;
+    margin-left: -15px;
+}
+
+.information-result-search {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-search-simple {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+input {
+    box-shadow: none !important;
+    border: 1px solid #8E8D8D;
+    border-radius: 2px;
+}
+
+label.label-title {
+    width: 100px;
+}
+
+.collapse {
+    background: transparent !important;
+}
+
+.btn-show-search {
+    /*margin-left: 15px;*/
+    border-radius: 0 !important;
+    padding: 4px 12px !important;
+}
+
+label {
+    font-size: 12px !important;
+}
+
+select[name="chibo"] {
+    height: 25px;
+    width: 400px;
+}
+
+select {
+    height: 25px;
+}
