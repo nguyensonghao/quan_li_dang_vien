@@ -217,21 +217,35 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $list;
 	}
 
-	public function timkiemDangvien ($condition, $cqtd) {
+	public function timkiemDangvien ($condition, $cqtd, $date) {
 		// Kiểm tra thông tin tìm kiếm giới tính
 		if (!isset($condition['gt-nu']))
 			$condition['gt-nu'] = -1;
 		if (!isset($condition['gt-nam'])) 
 			$condition['gt-nam'] = -1;
 
-		$result = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])->paginate(20);
-		$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])->get();
-		$number = count($all);
-		$data = array(
-			'result' => $result, 
-			'numberResult' => $number,
-			'all' => $all
-		);
+		// Kiểm tra số tuổi nhập vào
+		if ($date == null) {
+			$result = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])->paginate(20);
+			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])->get();
+			$number = count($all);
+			$data = array(
+				'result' => $result, 
+				'numberResult' => $number,
+				'all' => $all
+			);
+		} else {
+			$result = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])->where('ntns', '<', $date['tu'])->Where('ntns', '>', $date['den'])->paginate(20);
+			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])->where('ntns', '<', $date['tu'])->Where('ntns', '>', $date['den'])->get();
+			$number = count($all);
+			$data = array(
+				'result' => $result, 
+				'numberResult' => $number,
+				'all' => $all
+			);
+		}
+
+		
 		return $data;
 	}
 

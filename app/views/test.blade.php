@@ -4,9 +4,9 @@
 	<title></title>
 </head>
 <body>
-	<form method="POST" action="{{Asset('dm')}}" enctype="multipart/form-data">
-		<input type="file" name="file">
-		<input type="submit" value="click">
+	<form method="post" action="{{Asset('test')}}">
+		<input type="date" name="date">
+		<button type="submit">Send</button>
 	</form>
 </body>
 </html>

@@ -4,9 +4,11 @@
 
 		public $exportData;
 		public $user;
+		public $servicesController;
 
 		public function __construct () {
 			$this->user = new User();
+			$this->servicesController = new ServicesController();
 		}
 		
 		// Hiển thị tìm kiếm cơ bản
@@ -32,7 +34,6 @@
 				$list['number_ds_dv'] = $this->querySearchSimple()['numberResult'];
 				return View::make('module.search.timkiem-ketqua', $list);	
 			}
-			
 		}
 
 		// Hàm xử lí tìm kiếm cơ bản
@@ -54,13 +55,26 @@
 
 		// Hàm tìm kiếm cơ bản trong cơ sở dữ liệu
 		public function querySearchSimple () {
+			$date = array();
 			$condition = Session::get('conditionSearchSimple');
 			if (!Session::has('chibotructhuoc') || is_null($condition['chibotructhuoc'])) {
 				$cqtd = 'Trường Đại học Bách Khoa Hà Nội';
 			} else {
 				$cqtd = DB::table('dm_chibo')->where('ma_dv', $condition['chibotructhuoc'])->first()->dv;	
 			}
-			$data = $this->user->timkiemDangvien($condition, $cqtd);
+
+			if ($condition['tuoitu'] != null && $condition['tuoiden'] != null) {
+
+				$tuoitu = $this->servicesController->subDateCurrentYear($condition['tuoitu']);
+				$tuoiden = $this->servicesController->subDateCurrentYear($condition['tuoiden']);
+				$date = array(
+					'tu' => $tuoitu,
+					'den' => $tuoiden
+				);
+			} else {
+				$date = null;
+			}
+			$data = $this->user->timkiemDangvien($condition, $cqtd, $date);
 			return $data;
 		}
 

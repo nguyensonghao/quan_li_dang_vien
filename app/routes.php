@@ -92,3 +92,11 @@ Route::get('/detail-notify', 'NotifyController@showDetailNotify');
 Route::controller('thongtindangvien', 'ThongtinDangvienController');
 Route::get('dangvien/thongtin/{shc}', 'ThongtinDangvienController@showDangvien');
 Route::get('dangvien/quatrinh/xoa/{qt_tbl}/{id}', 'ThongtinDangvienController@actionDeleteQuatrinh');
+
+Route::get('test', function () {
+	$dateB = new DateTime('2000-01-20'); 
+	$dateA = $dateB->sub(date_interval_create_from_date_string('10 days')); 
+	print_r($dateA);
+});
+
+

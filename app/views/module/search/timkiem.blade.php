@@ -44,14 +44,14 @@
                     <div class="sex">
                         <div class="checkbox" style="float: left; margin-top: 0px; margin-right: 30px">
                             <label>
-                                <input type="checkbox" name="gt-nam" value="1">
+                                <input type="checkbox" name="gt-nam" value="1" checked="">
                                 Nam
                             </label>
                         </div>
 
                         <div class="checkbox" style="float: right; margin-top: 0px">
                             <label>
-                                <input type="checkbox" name="gt-nu" value="0">
+                                <input type="checkbox" name="gt-nu" value="0" checked="">
                                 Nữ
                             </label>
                         </div>
@@ -139,11 +139,22 @@
             })
 
             // Kiểm tra xem dữ liệu tuổi từ có lớn hơn dữ liệu tuổi đến trước khi submit
-            $('form').submit(function () {
+            $('form').submit(function (event) {
                 var tuoiTu = $('input[name="tuoitu"]').val();
                 var tuoiDen = $('input[name="tuoiden"]').val();
-                if (tuoiDen < tuoiTu) {
-                    alert('Số tuổi đến với lớn hơn tuổi từ')
+                
+                if (tuoiTu < 0 || tuoiDen < 0) {
+                    alert('Số tuổi phải lớn hơn 0');
+                    event.preventDefault();
+                } else if (tuoiDen < tuoiTu) {
+                    alert('Số tuổi đến với lớn hơn tuổi từ');
+                    event.preventDefault();
+                } else if (tuoiTu == '' && tuoiDen != '') {
+                    alert('Phải nhập số tuổi từ khi nhập số tuổi đến');
+                    event.preventDefault();
+                } else if (tuoiDen == '' && tuoiTu != '') {
+                    alert('Phải nhập số tuổi đến khi nhập số tuổi từ');
+                    event.preventDefault();
                 }
             })
         })
