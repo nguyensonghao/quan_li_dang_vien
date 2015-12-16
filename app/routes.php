@@ -94,9 +94,12 @@ Route::get('dangvien/thongtin/{shc}', 'ThongtinDangvienController@showDangvien')
 Route::get('dangvien/quatrinh/xoa/{qt_tbl}/{id}', 'ThongtinDangvienController@actionDeleteQuatrinh');
 
 Route::get('test', function () {
-	$dateB = new DateTime('2000-01-20'); 
-	$dateA = $dateB->sub(date_interval_create_from_date_string('10 days')); 
-	print_r($dateA);
+	$result = array();
+	$e1 = array('name' => 'hao', 'age' => 1);
+	$e2 = array('name' => 'nam', 'age' => 2);
+	array_push($result, $e1);
+	array_push($result, $e2);
+	print_r(array_keys($result[0]));
 });
 
 

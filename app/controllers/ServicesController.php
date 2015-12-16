@@ -24,6 +24,26 @@ class ServicesController {
 		return true;
 	}
 
+	// Hàm chuyển key của mảng chi tiết
+	public function convertKeyArraySearch ($array) {
+		if ($array == null || count($array) == 0)
+			return;
+
+		$listKey = array_keys($array[0]);
+		for ($i = 0; $i < count($listKey); $i++) {
+			$e = $listKey[$i];
+			switch ($e) {
+				case 'sohieuchuan':
+					
+					break;
+				
+				default:
+					
+					break;
+			}
+		}
+	}
+
 }
 
 ?>
