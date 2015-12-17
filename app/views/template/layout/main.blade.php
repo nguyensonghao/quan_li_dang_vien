@@ -13,7 +13,7 @@
     {{ HTML::script('libs/Filterable-Select-Box/source/jquery.editable-select.js') }}
     {{ HTML::script('libs/Scroll-To-Top/jquery.scrollToTop.js') }}
 </head>
-<body style="background: url('image/noise.png')">
+<body style="background: url('{{Asset('image/noise.png')}}')">
 
 
 @if (Auth::user()->token == 1)

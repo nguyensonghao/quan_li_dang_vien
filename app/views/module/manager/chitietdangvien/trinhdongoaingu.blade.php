@@ -36,7 +36,7 @@
     <tr>
       <td>Tiếng Anh</td>
       <td>{{ $value->ma_td }}</td>
-      <td></td>
+      <td>{{ $value->ttk_tdnn }}</td>
       <td>
         <a class="btn btn-link btn-sm">
           <span class="glyphicon glyphicon-pencil"></span> 

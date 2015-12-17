@@ -12,16 +12,17 @@
     <tr>
       <th>Khoảng thời gian</th>
       <th>Chức vụ chính quyền</th>
-      <th>Đơn vị quản li</th>
+      <th>Đơn vị quản lí</th>
       <th>Sửa</th>
       <th>Xóa</th>
     </tr>
   </thead>
   <tbody>
+    @foreach ($chucvucq as $value)
     <tr>
-      <td>Tiếng Anh</td>
-      <td>Trình độ C</td>
       <td></td>
+      <td>{{$value->cv}}</td>
+      <td>{{$value->donvi}}</td>
       <td>
         <a class="btn btn-link btn-sm">
           <span class="glyphicon glyphicon-pencil"></span> 
@@ -35,6 +36,7 @@
         </a>
       </td>
     </tr>
+    @endforeach
   </tbody>
 </table>
 

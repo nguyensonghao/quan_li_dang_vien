@@ -26,13 +26,24 @@
 
 		// Hiển thị kết quả tìm kiếm cơ bản
 		public function showSearchResult () {
-			if (!Session::has('conditionSearchSimple')) {
-				return Redirect::to('search');
+			if (!Session::has('conditionSearchSimple') && !Session::has('conditionSearchAdvance')) {
+				return Redirect::to('timkiem');
 			} else {
-				$list = $this->user->danhmucTimkiem();
-				$list['ds_dv'] = $this->querySearchSimple()['result'];
-				$list['number_ds_dv'] = $this->querySearchSimple()['numberResult'];
-				return View::make('module.search.timkiem-ketqua', $list);	
+				if (Session::has('conditionSearchAdvance')) {
+					$list = $this->user->danhmucTimkiem();
+					$condition = Session::get('conditionSearchAdvance');
+					$result = $this->user->timkiemDangvienNangcao($condition);
+					$list['ds_dv'] = $result['result'];
+					$list['type'] = 1;
+					$list['number_ds_dv'] = $result['numberResult'];
+					return View::make('module.search.timkiem-ketqua', $list);	
+				} else {
+					$list = $this->user->danhmucTimkiem();
+					$list['type'] = 0;
+					$list['ds_dv'] = $this->querySearchSimple()['result'];
+					$list['number_ds_dv'] = $this->querySearchSimple()['numberResult'];
+					return View::make('module.search.timkiem-ketqua', $list);	
+				}
 			}
 		}
 
@@ -40,6 +51,7 @@
 		public function actionSearchSimple () {
 			$condition = Input::all();
 			Session::set('conditionSearchSimple', $condition);
+			Session::forget('conditionSearchAdvance');
 			return Redirect::to('timkiem/ketqua');
 		}
 
@@ -80,13 +92,26 @@
 
 		// Hàm tìm kiếm kết quả theo danh sách trường thông tin để in
 		public function querySearchSimpleToPrint($listOfField) {
+			$date = array();
 			$condition = Session::get('conditionSearchSimple');
 			if (!Session::has('chibotructhuoc') || is_null($condition['chibotructhuoc'])) {
 				$cqtd = 'Trường Đại học Bách Khoa Hà Nội';
 			} else {
 				$cqtd = DB::table('dm_chibo')->where('ma_dv', $condition['chibotructhuoc'])->first()->dv;	
 			}
-			$data = $this->user->timkiemDangvienTheoTruong($condition, $cqtd, $listOfField);
+
+			if ($condition['tuoitu'] != null && $condition['tuoiden'] != null) {
+
+				$tuoitu = $this->servicesController->subDateCurrentYear($condition['tuoitu']);
+				$tuoiden = $this->servicesController->subDateCurrentYear($condition['tuoiden']);
+				$date = array(
+					'tu' => $tuoitu,
+					'den' => $tuoiden
+				);
+			} else {
+				$date = null;
+			}
+			$data = $this->user->timkiemDangvienTheoTruong($condition, $cqtd, $date, $listOfField);
 			return $data;
 		}
 
@@ -122,16 +147,9 @@
 
 		public function actionSearchAdvance () {
 			$condition = json_decode(Input::get('condition'));
-			// foreach ($condition as $key => $value) {
-			// 	switch ($value) {
-			// 		case 'hoten':
-			// 			break;
-					
-			// 		default:
-			// 			break;
-			// 	}				
-			// }
-			print_r($condition);
+			Session::set('conditionSearchAdvance', $condition);
+			Session::forget('conditionSearchSimple');
+			return Redirect::to('timkiem/ketqua');
 		}
 
 

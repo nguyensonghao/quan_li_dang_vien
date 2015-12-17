@@ -119,7 +119,7 @@
       <div role="tabpanel" class="tab-pane" id="qq">
         Thuộc : 
         <select name="qq">
-          @foreach ($quequan as $value)
+          @foreach ($qq as $value)
             <option value="{{$value->ma_ttp}}">{{$value->ttp}}</option>
           @endforeach
         </select>
@@ -173,10 +173,10 @@
         </select>
       </div>
       <div role="tabpanel" class="tab-pane" id="nvd">
-        Bằng : <input type="number" name="nvd_bang"><br>
+        Bằng : <input type="date" name="nvd_bang"><br>
         <p></p>
-        Từ : <input type="number" name="nvd_tu" style="margin-left: 15px">
-        Đến : <input type="number" name="nvd_den">
+        Từ : <input type="date" name="nvd_tu" style="margin-left: 15px">
+        Đến : <input type="date" name="nvd_den">
       </div>
       <div role="tabpanel" class="tab-pane" id="cvd">
         Thuộc : 
@@ -211,7 +211,7 @@
         </select>
       </div>
       <div role="tabpanel" class="tab-pane" id="np">
-        Năm phong : <input type="text" name="np">
+        Năm phong : <input type="date" name="np">
       </div>
       <div role="tabpanel" class="tab-pane" id="cvcq">
         Thuộc : 
@@ -288,7 +288,7 @@
         </select>
       </div>
       <div role="tabpanel" class="tab-pane" id="nkt">
-        Năm khen thưởng : <input type="text" name="nkt">
+        Năm khen thưởng : <input type="date" name="nkt">
       </div>
       <div role="tabpanel" class="tab-pane" id="htkl">
         Thuộc : 
@@ -300,6 +300,7 @@
       </div>
       <div role="tabpanel" class="tab-pane" id="ndbd">
         Nội dung bồi dưỡng
+        <input type="text" name="ndbd">
       </div>
       <div role="tabpanel" class="tab-pane" id="tndt">
         Thuộc :
@@ -368,6 +369,7 @@ $(document).ready(function () {
       }
     } else if (current_type_search == 'gt') {
       var gt = $('select[name="gt"]').val();
+      var gt_text = $('select[name="gt"]').text();
       if (gt != '') {
         list_search['gt'] = gt;  
       }
@@ -684,77 +686,122 @@ $(document).ready(function () {
           }
         }
       } else if (i == 'gt') {
-        string_query += 'Và giới tính là "'+e+'" \n';
+        var string = $('select[name="gt"] > option:selected').text();
+        string_query += 'Và giới tính là "'+string+'" \n';
       } else if (i == 'donvi') {  
-        string_query += 'Và đơn vị là "'+e+'" \n';
+        var string = $('select[name="donvi"] > option:selected').text();
+        string_query += 'Và đơn vị là "'+string+'" \n';
       } else if (i == 'kcb') {
-        string_query += 'Và khối cán bộ là "'+e+'" \n';
+        var string = $('select[name="kcb"] > option:selected').text();
+        string_query += 'Và khối cán bộ là "'+string+'" \n';
       } else if (i == 'tthn') {
-        string_query += 'Và tình trạng hiện nay là "'+e+'"\n';
+        var string = $('select[name="tthn"] > option:selected').text();
+        string_query += 'Và tình trạng hiện nay là "'+string+'"\n';
       } else if (i == 'ttht') {
-        string_query += 'Và trạng thái hiện tại là "'+e+'"\n';
+        var string = $('select[name="ttht"] > option:selected').text();
+        string_query += 'Và trạng thái hiện tại là "'+string+'"\n';
       } else if (i == 'qq') {
-        string_query += 'Và quê quán là "'+e+'" \n';
+        var string = $('select[name="qq"] > option:selected').text();
+        string_query += 'Và quê quán là "'+string+'" \n';
       } else if (i == 'dt') {
-        string_query += 'Và dân tộc là "'+e+'" \n';
+        var string = $('select[name="dt"] > option:selected').text();
+        string_query += 'Và dân tộc là "'+string+'" \n';
       } else if (i == 'tdth') {
-        string_query += 'Và trình độ tin học là "'+e+'" \n';
+        var string = $('select[name="tdth"] > option:selected').text();
+        string_query += 'Và trình độ tin học là "'+string+'" \n';
       } else if (i == 'tdllct') {
-        string_query += 'Và trình độ lí luận chính trị là "'+e+'" \n';
+        var string = $('select[name="tdllct"] > option:selected').text();
+        string_query += 'Và trình độ lí luận chính trị là "'+string+'" \n';
       } else if (i == 'tdqlnn') {
-        string_query += 'Và trình độ quản lí nhà nước là "'+e+'" \n';
+        var string = $('select[name="tdqlnn"] > option:selected').text();
+        string_query += 'Và trình độ quản lí nhà nước là "'+string+'"\n';
       } else if (i == 'tnn') {
-        string_query += 'Và tên ngoại ngữ là "'+e+'" \n';
+        var string = $('select[name="tnn"] > option:selected').text();
+        string_query += 'Và tên ngoại ngữ là "'+string+'" \n';
       } else if (i == 'tdnn') {
-        string_query += 'Và trình độ ngoại ngữ là "'+e+'" \n';
+        var string = $('select[name="tdnn"] > option:selected').text();
+        string_query += 'Và trình độ ngoại ngữ là "'+string+'" \n';
       } else if (i == 'cvd') {
-        string_query += 'Và chức vụ Đảng là "'+e+'"\n';
+        var string = $('select[name="cvd"] > option:selected').text();
+        string_query += 'Và chức vụ Đảng là "'+string+'"\n';
       } else if (i == 'cvdt') {
-        string_query += 'Và chức vụ đoàn thể là "'+e+'" \n';
+        var string = $('select[name="cvdt"] > option:selected').text();
+        string_query += 'Và chức vụ đoàn thể là "'+string+'"\n';
       } else if (i == 'hh') {
-        string_query += 'Và học hàm là "'+e+'" \n';
+        var string = $('select[name="hh"] > option:selected').text();
+        string_query += 'Và học hàm là "'+string+'"\n';
       } else if (i == 'dhdp') {
-        string_query += 'Và danh hiệu được phong là "'+e+'" \n';
+        var string = $('select[name="dhdp"] > option:selected').text();
+        string_query += 'Và danh hiệu được phong là "'+string+'"\n';
       } else if (i == 'np') {
-        string_query += 'Và năm phong là "'+e+'" \n';
+        string_query += 'Và năm phong là "'+e+'"\n';
       } else if (i == 'cvcq') {
-        string_query += 'Và chức vụ chính quyền là "'+e+'" \n';
+        var string = $('select[name="cvcq"] > option:selected').text();
+        string_query += 'Và chức vụ chính quyền là "'+string+'"\n';
       } else if (i == 'ncc') {
-        string_query += 'Và ngạch công chức là "'+e+'"\n ';
+        var string = $('select[name="ncc"] > option:selected').text();
+        string_query += 'Và ngạch công chức là "'+string+'"\n';
       } else if (i == 'mnhn') {
-        string_query += 'Và mã ngạch hiện nay là "'+e+'" \n';
+        string_query += 'Và mã ngạch hiện nay là "'+e+'"\n';
       } else if (i == 'blhn') {
-        string_query += 'Và bậc lương hiện nay là "'+e+'" \n';
+        string_query += 'Và bậc lương hiện nay là "'+string+'"\n';
       } else if (i == 'cndt') {
-        string_query += 'Và chuyên ngành đào tạo là "'+e+'"\n ';
+        var string = $('select[name="cndt"] > option:selected').text();
+        string_query += 'Và chuyên ngành đào tạo là "'+string+'"\n';
       } else if (i == 'htdt') {
-        string_query += 'Và hình thức đào tạo là "'+e+'" \n';
+        var string = $('select[name="htdt"] > option:selected').text();
+        string_query += 'Và hình thức đào tạo là "'+string+'"\n';
       } else if (i == 'vbdt') {
-        string_query += 'Và văn bằng đào tạo là "'+e+'" \n';
+        var string = $('select[name="vbdt"] > option:selected').text();
+        string_query += 'Và văn bằng đào tạo là "'+string+'"\n';
       } else if (i == 'ndt') {
-        string_query += 'Và nước đào tại là "'+e+'" \n';
+        string_query += 'Và nước đào tại là "'+string+'"\n';
       } else if (i == 'tgdt') {
-        string_query += 'Và thời gian đào tạo là "'+e+'" \n';
+        string_query += 'Và thời gian đào tạo là "'+e+'"\n';
       } else if (i == 'htkt') {
-        string_query += 'Và hình thức khen thưởng là "'+e+'" \n';
+        string_query += 'Và hình thức khen thưởng là "'+string+'"\n';
       } else if (i == 'nkt') {
-        string_query += 'Và năm khen thưởng là "'+e+'" \n';
+        string_query += 'Và năm khen thưởng là "'+string+'"\n';
       } else if (i == 'htkl') {
-        string_query += 'Và hình thức kỉ luật là "'+e+'" \n';
+        var string = $('select[name="htkl"] > option:selected').text();
+        string_query += 'Và hình thức kỉ luật là "'+string+'"\n';
       } else if (i == 'ndbd') {
-        string_query += 'Và nội dung bồi dưỡng là "'+e+'" \n';
+        string_query += 'Và nội dung bồi dưỡng là "'+string+'"\n';
       } else {
-        string_query += 'Và tên nước đã tới là "'+e+'" \n';
+        var string = $('select[name="tndt"] > option:selected').text();
+        string_query += 'Và tên nước đã tới là "'+string+'"\n';
       }
     }
 
+    if (string_query.indexOf('Họ tên bằng') != 0) {
+      string_query = string_query.substr(3);
+      string_query = string_query.substr(0, 1).toUpperCase() + string_query.substr(1);
+    }
     return string_query;
   }
 
   // Hàm truyền điều kiện tìm kiếm trước khi submit form
-  $('form').submit(function () {
-    var condition = JSON.stringify(list_search);
-    $('input[name="condition"]').val(condition);
+  $('form').submit(function (event) {
+      var condition = JSON.stringify(list_search);
+      $('input[name="condition"]').val(condition);
+
+      var tuoiBang = $('input[name="tuoi_bang"]').val(); 
+      var tuoiTu = $('input[name="tuoi_tu"]').val();
+      var tuoiDen = $('input[name="tuoi_den"]').val();      
+
+      if (tuoiTu < 0 || tuoiDen < 0 || tuoiBang < 0) {
+          alert('Số tuổi phải lớn hơn 0');
+          event.preventDefault();
+      } else if (tuoiDen < tuoiTu) {
+          alert('Số tuổi đến với lớn hơn tuổi từ');
+          event.preventDefault();
+      } else if (tuoiTu == '' && tuoiDen != '') {
+          alert('Phải nhập số tuổi từ khi nhập số tuổi đến');
+          event.preventDefault();
+      } else if (tuoiDen == '' && tuoiTu != '') {
+          alert('Phải nhập số tuổi đến khi nhập số tuổi từ');
+          event.preventDefault();
+      }
   })
 })
 </script>

@@ -154,17 +154,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function chucvuChinhquyenDangvien ($shcc) {
-		// $chinhquyen = DB::table('table')
+		$chucvu = DB::table('qtcvkn_tbl')
+		->where('shcc', $shcc)
+		->join('dm_cv', 'dm_cv.ma_cv', '=', 'qtcvkn_tbl.ma_cv')
+		->get();
+		return $chucvu;
 	}
-
-	public function chucvuDangvien ($shcc) {
-		
-	}
-
-	public function quatrinhDaotaoDangvien ($shcc) {
-
-	}
-
+	
 	public function quatrinhCongtacDangvien ($shcc) {
 		
 	}
@@ -204,6 +200,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$list['kt'] = DB::table('dm_kt')->get();
 		$list['kl'] = DB::table('dm_kl')->get();
 		$list['quequan'] = DB::table('dm_dd')->join('dm_ttp', 'dm_dd.ma_tinh', '=', 'dm_ttp.ma_ttp', 'left')->get();
+		$list['qq'] = DB::table('dm_ttp')->get();
 		$list['ngach'] = DB::table('dm_ngach')->get();
 		return $list;
 	}
@@ -249,36 +246,314 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $data;
 	}
 
-	public function timkiemDangvienTheoTruong ($condition, $cqtd, $listOfField) {
+	public function timkiemDangvienTheoTruong ($condition, $cqtd, $date, $listOfField) {
 		// Kiểm tra thông tin tìm kiếm giới tính
 		if (!isset($condition['gt-nu']))
 			$condition['gt-nu'] = -1;
 		if (!isset($condition['gt-nam'])) 
 			$condition['gt-nam'] = -1;
+		// Kiểm tra số tuổi nhập vào
+		if ($date == null) {
+			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])
+			// ->select($listOfField)
+			->leftJoin('dm_nm', 'soyeu_tbl.ma_nm', '=', 'dm_nm.ma_nm') // Lấy nhóm máu
+			->leftJoin('dm_dt', 'soyeu_tbl.ma_dt', '=', 'dm_dt.ma_dt') // lấy dân tộc 
+			->leftJoin('dm_tg', 'soyeu_tbl.ma_tg', '=', 'dm_tg.ma_tg') // Lấy mã tôn giáo
+			->leftJoin('dm_tpxt', 'soyeu_tbl.ma_tpxt', '=', 'dm_tpxt.ma_tpxt') // Lấy mã thành phần xuất thân
+			->leftJoin('dm_tb', 'soyeu_tbl.ma_tb', '=', 'dm_tb.ma_tb') // Lấy mã thương binh 
+			->leftJoin('dm_tdhv', 'soyeu_tbl.ma_tdhv', '=', 'dm_tdhv.ma_tdhv') // Lấy mã trình độ học vấn
+			->leftJoin('dm_tdth', 'soyeu_tbl.ma_tdth', '=', 'dm_tdth.ma_tdth') // Lấy mã trình tin học
+			->leftJoin('dm_tdll', 'soyeu_tbl.ma_tdllct', '=', 'dm_tdll.ma_tdll') // Lấy mã trình độ lí luận
+			->leftJoin('dm_tdql', 'soyeu_tbl.ma_tdqlnn', '=', 'dm_tdql.ma_tdql') // Lấy mã trình độ quả lí
+			->leftJoin('dm_ttsk', 'soyeu_tbl.ma_ttsk', '=', 'dm_ttsk.ma_ttsk') // Lấy tình trạng sức khỏe
+			->leftJoin('dm_dcb', 'soyeu_tbl.dcb', '=', 'dm_dcb.ma_dcb') // Lấy diện cán bộ
+			->leftJoin('dm_tt', 'soyeu_tbl.tt', '=', 'dm_tt.ma_tt') // Lấy tình trạng.. nghỉ hưu..
+			->leftJoin('dm_ttht', 'soyeu_tbl.ttht', '=', 'dm_ttht.ma_ttht') // Lấy tình trang hiện tại .. nghỉ thai sản, đi nước ngoài
+			->leftJoin('dm_tthn', 'soyeu_tbl.tthn', '=', 'dm_tthn.ma_tthn') // Lấy tình trạng hôn nhân
+			->leftJoin('dm_kcb', 'soyeu_tbl.kcb', '=', 'dm_kcb.ma_kcb') // Lấy khối cán bộ .. giảng dạy, hình chính
+			->leftJoin('dm_dd', 'soyeu_tbl.ma_hktt', '=', 'dm_dd.ma_huyen')
+			->leftJoin('dm_gdcs', 'soyeu_tbl.ma_gdtdcs', '=', 'dm_gdcs.ma_gdcs')
+			->leftJoin('dm_dv', 'soyeu_tbl.ma_dvql', '=', 'dm_dv.ma_dv')
+			->leftJoin('qtdtcm_tbl', 'soyeu_tbl.shcc', '=', 'qtdtcm_tbl.shcc')
+			->get();
+		} else {
+			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")->where('gt', $condition['gt-nam'])->orWhere('gt', $condition['gt-nu'])->where('ntns', '<', $date['tu'])->Where('ntns', '>', $date['den'])
+			// ->select($listOfField)
+			->leftJoin('dm_nm', 'soyeu_tbl.ma_nm', '=', 'dm_nm.ma_nm') // Lấy nhóm máu
+			->leftJoin('dm_dt', 'soyeu_tbl.ma_dt', '=', 'dm_dt.ma_dt') // lấy dân tộc 
+			->leftJoin('dm_tg', 'soyeu_tbl.ma_tg', '=', 'dm_tg.ma_tg') // Lấy mã tôn giáo
+			->leftJoin('dm_tpxt', 'soyeu_tbl.ma_tpxt', '=', 'dm_tpxt.ma_tpxt') // Lấy mã thành phần xuất thân
+			->leftJoin('dm_tb', 'soyeu_tbl.ma_tb', '=', 'dm_tb.ma_tb') // Lấy mã thương binh 
+			->leftJoin('dm_tdhv', 'soyeu_tbl.ma_tdhv', '=', 'dm_tdhv.ma_tdhv') // Lấy mã trình độ học vấn
+			->leftJoin('dm_tdth', 'soyeu_tbl.ma_tdth', '=', 'dm_tdth.ma_tdth') // Lấy mã trình tin học
+			->leftJoin('dm_tdll', 'soyeu_tbl.ma_tdllct', '=', 'dm_tdll.ma_tdll') // Lấy mã trình độ lí luận
+			->leftJoin('dm_tdql', 'soyeu_tbl.ma_tdqlnn', '=', 'dm_tdql.ma_tdql') // Lấy mã trình độ quả lí
+			->leftJoin('dm_ttsk', 'soyeu_tbl.ma_ttsk', '=', 'dm_ttsk.ma_ttsk') // Lấy tình trạng sức khỏe
+			->leftJoin('dm_dcb', 'soyeu_tbl.dcb', '=', 'dm_dcb.ma_dcb') // Lấy diện cán bộ
+			->leftJoin('dm_tt', 'soyeu_tbl.tt', '=', 'dm_tt.ma_tt') // Lấy tình trạng.. nghỉ hưu..
+			->leftJoin('dm_ttht', 'soyeu_tbl.ttht', '=', 'dm_ttht.ma_ttht') // Lấy tình trang hiện tại .. nghỉ thai sản, đi nước ngoài
+			->leftJoin('dm_tthn', 'soyeu_tbl.tthn', '=', 'dm_tthn.ma_tthn') // Lấy tình trạng hôn nhân
+			->leftJoin('dm_kcb', 'soyeu_tbl.kcb', '=', 'dm_kcb.ma_kcb') // Lấy khối cán bộ .. giảng dạy, hình chính
+			->leftJoin('dm_dd', 'soyeu_tbl.ma_hktt', '=', 'dm_dd.ma_huyen')
+			->leftJoin('dm_gdcs', 'soyeu_tbl.ma_gdtdcs', '=', 'dm_gdcs.ma_gdcs')
+			->leftJoin('dm_dv', 'soyeu_tbl.ma_dvql', '=', 'dm_dv.ma_dv')
+			->leftJoin('qtdtcm_tbl', 'soyeu_tbl.shcc', '=', 'qtdtcm_tbl.shcc')
+			->get();
+		}
 
-		$result = DB::table('soyeu_tbl')->select($listOfField)
-		->select($listOfField)
-		->where("soyeu_tbl.ttd", "like", "%".$condition['hoten']."%")->where("soyeu_tbl.cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("soyeu_tbl.tt", "like", "%".$condition['tt']."%")->where("soyeu_tbl.kcb", "like", "%".$condition['kcb']."%")->where("soyeu_tbl.dcb", "like", "%".$condition['dcb']."%")->where('soyeu_tbl.gt', $condition['gt-nam'])->orWhere('soyeu_tbl.gt', $condition['gt-nu'])
-		->leftJoin('dm_nm', 'soyeu_tbl.ma_nm', '=', 'dm_nm.ma_nm') // Lấy nhóm máu
-		->leftJoin('dm_dt', 'soyeu_tbl.ma_dt', '=', 'dm_dt.ma_dt') // lấy dân tộc 
-		->leftJoin('dm_tg', 'soyeu_tbl.ma_tg', '=', 'dm_tg.ma_tg') // Lấy mã tôn giáo
-		->leftJoin('dm_tpxt', 'soyeu_tbl.ma_tpxt', '=', 'dm_tpxt.ma_tpxt') // Lấy mã thành phần xuất thân
-		->leftJoin('dm_tb', 'soyeu_tbl.ma_tb', '=', 'dm_tb.ma_tb') // Lấy mã thương binh 
-		->leftJoin('dm_tdhv', 'soyeu_tbl.ma_tdhv', '=', 'dm_tdhv.ma_tdhv') // Lấy mã trình độ học vấn
-		->leftJoin('dm_tdth', 'soyeu_tbl.ma_tdth', '=', 'dm_tdth.ma_tdth') // Lấy mã trình tin học
-		->leftJoin('dm_tdll', 'soyeu_tbl.ma_tdllct', '=', 'dm_tdll.ma_tdll') // Lấy mã trình độ lí luận
-		->leftJoin('dm_tdql', 'soyeu_tbl.ma_tdqlnn', '=', 'dm_tdql.ma_tdql') // Lấy mã trình độ quả lí
-		->leftJoin('dm_ttsk', 'soyeu_tbl.ma_ttsk', '=', 'dm_ttsk.ma_ttsk') // Lấy tình trạng sức khỏe
-		->leftJoin('dm_dcb', 'soyeu_tbl.dcb', '=', 'dm_dcb.ma_dcb') // Lấy diện cán bộ
-		->leftJoin('dm_tt', 'soyeu_tbl.tt', '=', 'dm_tt.ma_tt') // Lấy tình trạng.. nghỉ hưu..
-		->leftJoin('dm_ttht', 'soyeu_tbl.ttht', '=', 'dm_ttht.ma_ttht') // Lấy tình trang hiện tại .. nghỉ thai sản, đi nước ngoài
-		->leftJoin('dm_tthn', 'soyeu_tbl.tthn', '=', 'dm_tthn.ma_tthn') // Lấy tình trạng hôn nhân
-		->leftJoin('dm_kcb', 'soyeu_tbl.kcb', '=', 'dm_kcb.ma_kcb') // Lấy khối cán bộ .. giảng dạy, hình chính
-		->leftJoin('dm_dd', 'soyeu_tbl.ma_hktt', '=', 'dm_dd.ma_huyen')
-		->leftJoin('dm_gdcs', 'soyeu_tbl.ma_gdtdcs', '=', 'dm_gdcs.ma_gdcs')
-		->leftJoin('dm_dv', 'soyeu_tbl.ma_dvql', '=', 'dm_dv.ma_dv')
-		->leftJoin('qtdtcm_tbl', 'soyeu_tbl.shcc', '=', 'qtdtcm_tbl.shcc')
-		->get();
+		return $all;
+	}
+
+	public function timkiemDangvienNangcao ($condition) {
+		$query = DB::table('soyeu_tbl');
+		foreach ($condition as $key => $value) {
+			if ($key == 'gt' || $key == 'donvi' || $key == 'kcb' || $key == 'tthn' 
+				|| $key == 'ttht' || $key == 'qq' || $key == 'dt' || $key == 'tdth'
+				|| $key == 'tdllct' || $key == 'tdqlnn' || $key == 'tnn' 
+				|| $key == 'tdnn' || $key == 'cvd' || $key == 'cvdt'
+				|| $key == 'hh' || $key == 'dhdp' || $key == 'cvcq'
+				|| $key == 'ncc' || $key == 'cndt' || $key == 'htdt'
+				|| $key == 'vbdt' || $key == 'ndt' || $key == 'htkt'
+				|| $key == 'htkl' || $key == 'tndt' || $key == 'ndbd') {
+				switch ($key) {
+					case 'gt':
+						$query = $query->where('gt', $value);
+						break;
+					
+					case 'donvi':
+						$query = $query->where('ma_dvql', $value);
+
+					case 'kcb':
+						$query = $query->where('kcb', $value);
+						break;
+
+					case 'tthn':
+						$query = $query->where('tthn', $value);
+						break;
+
+					case 'ttht':
+						$query = $query->where('ttht', $value);
+						break;
+
+					case 'qq':
+						$query = $query->where('ma_qq', $value);
+						break;
+
+					case 'dt':
+						$query = $query->where('ma_dt', $value);
+						break;
+
+					case 'tdth':
+						$query = $query->where('ma_tdth', $value);
+						break;
+
+					case 'tdllct':
+						$query = $query->where('ma_tdllct', $value);
+						break;
+
+					case 'tdqlnn':
+						$query = $query->where('ma_tdqlnn', $value);
+						break;
+
+					case 'tnn':
+						$query = $query->leftJoin('tdnn_tbl', 'tdnn_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('tdnn_tbl.ma_nn', $value);
+						break;
+
+					case 'tdnn':
+						$query = $query->where('tdnn', $value);
+						break;
+
+					case 'cvd':
+						$query = $query->leftJoin('qtcvdt_tbl', 'qtcvdt_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtcvdt_tbl.ma_cv', $value)->where('qtcvdt_tbl.lcd', '#', 1);
+						break;							
+
+					case 'cvdt':
+						$query = $query->leftJoin('qtcvdt_tbl', 'qtcvdt_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtcvdt_tbl.ma_cv', $value)->where('qtcvdt_tbl.lcd', 1);
+						break;	
+
+					case 'hh':
+						$query = $query->leftJoin('qtcd_tbl', 'qtcd_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('ma_dh', $value)->where('lcd', '=', 0);
+						break;
+
+					case 'dhdp':
+						$query = $query->leftJoin('qtcd_tbl', 'qtcd_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('ma_dh', $value);
+						break;
+
+					case 'cvcq':
+						$query = $query->leftJoin('qtcvkn_tbl', 'qtcvkn_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtcvkn_tbl.ma_cv', $value);
+						break;	
+
+					case 'htkt':
+						$query = $query->leftJoin('qtkt_tbl', 'qtkt_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtkt_tbl.ma_htkt', $value);
+						break;
+
+					case 'htkl':
+						$query = $query->leftJoin('qtkl_tbl', 'qtkl_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtkl_tbl.ma_htkl', $value);
+						break;
+
+					case 'tdth':
+						$query = $query->leftJoin('nndd_tbl', 'nndd_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtkl_tbl.ndd', $value);
+						break;							
+
+					case 'ncc':
+						$query = $query->leftJoin('qtdbl_tbl', 'qtdbl_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtdbl_tbl.ma_ngach', $value);
+						break;	
+
+					case 'cndt':
+						$query = $query->leftJoin('qtdtcm_tbl', 'qtdtcm_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtdtcm_tbl.ma_cndt', $value);
+						break;	
+
+					case 'htdt':
+						$query = $query->leftJoin('qtdtcm_tbl', 'qtdtcm_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtdtcm_tbl.htdtcm ', $value);
+						break;	
+
+					case 'vbdt':
+						$query = $query->leftJoin('qtdtcm_tbl', 'qtdtcm_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtdtcm_tbl.vbdtcm ', $value);
+						break;	
+
+					case 'ndt':
+						$query = $query->leftJoin('qtdtcm_tbl', 'qtdtcm_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtdtcm_tbl.ndtcm  ', $value);
+						break;	
+
+					case 'ndbd':
+						$query = $query->leftJoin('qtbd_tbl', 'qtbd_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('qtbd_tbl.ndbd', 'like', '%'.$value.'%');
+						break;	
+
+					case 'tndt':
+						$query = $query->leftJoin('nndd_tbl', 'nndd_tbl.shcc', '=', 'soyeu_tbl.shcc')
+						->where('nndd_tbl.ndd', $value);
+						break;	
+
+					default:
+						# code...
+						break;
+				}
+			} else if ($key == 'hoten' || $key == 'shcc') {
+				switch ($key) {
+					case 'hoten':
+						if (!isset($value->bang) || $value->bang == null) {
+							$bang = '-1';
+						} else {
+							$bang = $value->bang;
+						}
+
+						if (!isset($value->chua) || $value->chua == null) {
+							$chua = '-1';
+						} else {
+							$chua = $value->chua;
+						}
+
+						$query = $query->where(function ($query) use ($bang, $chua) {
+	 					    $query->where('ttd', $bang)
+	           				->orWhere('ttd', 'like', '%'.$chua.'%');	
+	           			});
+
+						break;
+					
+					case 'shcc':
+						if (!isset($value->bang) || $value->bang == null) {
+							$bang = '-1';
+						} else {
+							$bang = $value->bang;
+						}
+
+						if (!isset($value->chua) || $value->chua == null) {
+							$chua = '-1';
+						} else {
+							$chua = $value->chua;
+						}
+
+						$query = $query->where(function ($query) use ($bang, $chua) {
+	 					    $query->where('shcc', $bang)
+	           				->orWhere('shcc', 'like', '%'.$chua.'%');	
+	           			});
+
+						break;
+
+					default:
+						# code...
+						break;
+				}
+			} else {
+				switch ($key) {
+					case 'tuoi':
+						// Không nhập tuổi bằng
+						if (!isset($value->bang) || $value->bang == null) {
+							if (isset($value->tu) && $value->tu != null) {
+								$year = (int)$value->den - (int)$value->tu;
+								$query = $query->where(function ($query) use ($year) {
+			 					   $query->whereRaw('year(now()) - year(ntns) > 0')
+			           				->whereRaw('year(now()) - year(ntns)  < ' . $year);	 
+			           			});
+							}
+						} else {
+						// Nhập tuổi bằng
+							if (isset($value->tu) && $value->tu != null) {
+								$year = (int)$value->den - (int)$value->tu;
+								$query = $query->whereRaw('year(now()) - year(ntns) = ' . $value->bang);
+								$query = $query->where(function ($query) use ($year) {
+			 					   $query->whereRaw('year(now()) - year(ntns) > 0')
+			           				->whereRaw('year(now()) - year(ntns)  < ' . $year);	 
+			           			});
+							} else {
+								$query = $query->whereRaw('year(now()) - year(ntns) = '.$value->bang);
+							}
+						}
+						break;
+					
+					case 'nvd':
+						if (!isset($value->bang) || $value->bang == null) {
+							if (isset($value->tu) && $value->tu != null) {
+								$tu = $value->tu;
+								$den = $value->den;
+								$query = $query->where(function ($query) use ($tu, $den) {
+			 					   $query->where('ntns', '>', $tu)
+			           				->where('ntns', '<', $den);	 
+			           			});
+							}
+						} else {
+							if (isset($value->tu) && $value->tu != null) {
+								$tu = $value->tu;
+								$den = $value->den;
+								$query = $query->whereRaw('year(now()) - year(ntns) = ' . $value->bang);
+								$query = $query->where(function ($query) use ($tu, $den) {
+			 					   $query->where('ntns', '>', $tu)
+			           				->where('ntns', '<', $den);	 
+			           			});
+							} else {
+								$query = $query->where('ntns', $value);
+							}
+						}
+						break;
+					default:
+						# code...
+						break;
+				}
+			}
+
+		}
+
+		$result = array (
+			'result' => $query->paginate(20),
+			'numberResult' => $query->count(),
+			'all' => $query->get()
+		);
+
 		return $result;
 	}
 

@@ -6,9 +6,11 @@ require_once public_path().'/libs/PHPWord/PHPWord.php';
 class ExportDataController{
 
 	public $objPHPExcel;	
+	public $serviceController;
 
 	public function __construct () {
 		$this->objPHPExcel = new PHPExcel();
+		$this->serviceController = new ServicesController();
 	}
 
 	public function test () {
@@ -41,15 +43,18 @@ class ExportDataController{
 
 	public function actionExportExcelFromArray ($array) {
 		$this->objPHPExcel->getProperties()->setCreator("Daihocbachkhoahanoi");
-
 		// Add some data
 
+		$listkeyCurrent = $this->serviceController->convertKeyArraySearch($array);
 		$listkey = array_keys($array[0]);
+		// Log::debug($listkeyCurrent);
+		// Log::debug($listkey);
 
 		$char = 'A';
 		$excel = $this->objPHPExcel->setActiveSheetIndex(0);
-		for ($i = 0; $i < count($listkey); $i++) {
-		    $excel->setCellValue($char.'1', $listkey[$i]);    
+
+		foreach ($listkeyCurrent as $key => $value) {
+			$excel->setCellValue($char.'1', $value);    
 		    $char ++;
 		}
 
@@ -60,12 +65,11 @@ class ExportDataController{
 			for ($i = 0; $i < count($listkey); $i++) {
 			    $excel->setCellValue($char.$j, $value[$listkey[$i]]);    
 			    $char ++;
+			    $log = $value[$listkey[$i]];
 			}
 
 			$j++;
 		}
-
-
 
 		$this->objPHPExcel->getActiveSheet()->setTitle('Baocao');
 		// Set active sheet index to the first sheet, so Excel opens this as the first sheet

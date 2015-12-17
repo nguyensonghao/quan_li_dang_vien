@@ -69,9 +69,10 @@
 			$listOfField = substr($listOfField, 0, strlen($listOfField) - 1);
 			$searchController = new SearchController();
 			$data = $searchController->querySearchSimpleToPrint($listOfField);
-			$data = json_decode(json_encode($data), true);
-			$this->exportData = new ExportDataController();
-			$this->exportData->actionExportExcelFromArray($data);
+			// // $data = json_decode(json_encode($data), true);
+			// // $this->exportData = new ExportDataController();
+			// // $this->exportData->actionExportExcelFromArray($data);
+			// // print_r($data);
 			print_r($data);
 		}
 

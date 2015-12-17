@@ -55,7 +55,7 @@
             <tr>
                 <td style="max-width: 400px;">
                     <label>Đơn vị</label>
-                    <select name="ma_dvql" style="width: 200px" required>
+                    <select name="ma_dvql" style="width: 200px">
                         @foreach($dv as $value)
                             <option value="{{$value->ma_dv}}">{{$value->dv}}</option>
                         @endforeach
@@ -73,7 +73,7 @@
             <tr>
                 <td>
                     <label>Diện cán bộ</label>
-                    <select name="dcb" required>
+                    <select name="dcb">
                         @foreach($dcb as $value)
                             <option value="{{$value->ma_dcb}}">{{$value->dcb}}</option>
                         @endforeach
@@ -81,7 +81,7 @@
                 </td>
                 <td>
                     <label>Hiện nay</label>
-                    <select name="tt" required>
+                    <select name="tt">
                         @foreach($tt as $value)
                             <option value="{{$value->ma_tt}}">{{$value->tt}}</option>
                         @endforeach
@@ -89,7 +89,7 @@
                 </td>
                 <td>
                     <label style="min-width: 70px">Trạng thái</label>
-                    <select name="ttht" style="width: 140px" required>
+                    <select name="ttht" style="width: 140px">
                         @foreach($ttht as $value)
                             <option value="{{$value->ma_ttht}}">{{$value->ttht}}</option>
                         @endforeach
@@ -100,15 +100,15 @@
             <tr>
                 <td>
                     <label>Họ và tên</label>
-                    <input type="text" name="hoten" required>
+                    <input type="text" name="hoten">
                 </td>
                 <td>
                     <label>Tên thường dùng</label>
-                    <input type="text" name="ttd" required>
+                    <input type="text" name="ttd">
                 </td>
                 <td>
                     <label style="min-width: 70px">Giới tính</label>
-                    <select name="gt" required>
+                    <select name="gt">
                         <option value="1">Nam</option>
                         <option value="0">Nữ</option>
                     </select>
@@ -118,11 +118,11 @@
             <tr>
                 <td>
                     <label>Ngày sinh</label>
-                    <input type="date" name="ntns" required>
+                    <input type="date" name="ntns">
                 </td>
                 <td>
                     <label>Nơi sinh</label>
-                    <select name="ma_ns" required style="width: 150px">
+                    <select name="ma_ns" style="width: 150px">
                         @foreach($quequan as $value)
                             <option value="{{$value->ma_huyen}}">
                                 {{$value->ttp}} - {{$value->ten_huyen}}
@@ -132,7 +132,7 @@
                 </td>
                 <td>
                     <label style="min-width: 70px">Hôn nhân</label>
-                    <select name="tthn" style="width: 100px" required>
+                    <select name="tthn" style="width: 100px">
                         @foreach($tthn as $value)
                             <option value="{{$value->ma_tthn}}">{{$value->tthn}}</option>
                         @endforeach
@@ -143,7 +143,7 @@
             <tr>
                 <td>
                     <label>Quê quán</label>
-                    <select name="ma_qq" required style="width: 150px">
+                    <select name="ma_qq" style="width: 150px">
                         @foreach($quequan as $value)
                             <option value="{{$value->ma_huyen}}">
                                 {{$value->ttp}} - {{$value->ten_huyen}}
@@ -168,7 +168,7 @@
             <tr>
                 <td>
                     <label>Hộ khẩu thường chú</label>
-                    <select name="ma_hktt" required style="width: 150px">
+                    <select name="ma_hktt" style="width: 150px">
                         @foreach($quequan as $value)
                             <option value="{{$value->ma_huyen}}">
                                 {{$value->ttp}} - {{$value->ten_huyen}}
@@ -185,26 +185,26 @@
             <tr>
                 <td>
                     <label>Chỗ ở hiện nay</label>
-                    <input type="text" name="dctt" required>
+                    <input type="text" name="dctt">
                 </td>
                 <td>
                     <label>Điện thoại</label>
-                    <input type="text" name="tel" required>
+                    <input type="text" name="tel">
                 </td>
                 <td>
                     <label style="min-width: 70px">Email</label>
-                    <input type="email" name="email" required>
+                    <input type="email" name="email">
                 </td>
             </tr>
             
             <tr>
                 <td>
                     <label>Số chứng minh nhân dân</label>
-                    <input type="text" name="scmnd" required>
+                    <input type="text" name="scmnd">
                 </td>
                 <td>
                     <label>Nơi cấp</label>
-                    <select name="nc" required>
+                    <select name="nc">
                         @foreach($ttp as $value)
                             <option value="{{$value->ttp}}">{{$value->ttp}}</option>
                         @endforeach
@@ -212,14 +212,14 @@
                 </td>
                 <td>
                     <label style="min-width: 70px">Ngày cấp</label>
-                    <input type="date" name="ngay_cap" required>
+                    <input type="date" name="ngay_cap">
                 </td>
             </tr>
 
             <tr>
                 <td>
                     <label>Dân tộc</label>
-                    <select name="ma_dt" required>
+                    <select name="ma_dt">
                         @foreach($dt as $value)
                             <option value="{{$value->ma_dt}}">{{$value->dt}}</option>
                         @endforeach
@@ -227,7 +227,7 @@
                 </td>
                 <td>
                     <label>Tôn giáo</label>
-                    <select name="ma_tg" required>
+                    <select name="ma_tg">
                         @foreach($tg as $value)
                             <option value="{{$value->ma_tg}}">{{$value->tg}}</option>
                         @endforeach
@@ -235,7 +235,7 @@
                 </td>
                 <td>
                     <label style="min-width: 70px">Thành phần xuất thân</label>
-                    <select name="ma_tpxt" style="width: 105px" required>
+                    <select name="ma_tpxt" style="width: 105px">
                         @foreach($tpxt as $value)
                             <option value="{{$value->ma_tpxt}}">{{$value->tpxt}}</option>
                         @endforeach
@@ -246,7 +246,7 @@
             <tr>
                 <td>
                     <label>Diện ưu tiên</label>
-                    <select name="ma_tb" style="width: 170px" required>
+                    <select name="ma_tb" style="width: 170px">
                         @foreach($tb as $value)
                             <option value="{{$value->ma_tb}}">{{$value->tb}}</option>
                         @endforeach
@@ -254,7 +254,7 @@
                 </td>
                 <td>
                     <label>Gia đình chính sách</label>
-                    <select name="ma_gdtdcs" style="width: 170px" required>
+                    <select name="ma_gdtdcs" style="width: 170px">
                         @foreach($gdcs as $value)
                             <option value="{{$value->ma_gdcs}}">{{$value->gdcs}}</option>
                         @endforeach
@@ -278,7 +278,7 @@
             <tr>
                 <td>
                     <label>Cơ quan tiếp nhận</label>
-                    <select name="cqtd" required>
+                    <select name="cqtd">
                         <option>Trường đại học Bách Khoa Hà Nội</option>
                     </select>
                 </td>
@@ -292,7 +292,7 @@
             <tr>
                 <td>
                     <label>Công việc được giao</label>
-                    <select name="vdpc" style="width: 210px" required>
+                    <select name="vdpc" style="width: 210px">
                         @foreach($cv as $value)
                             <option value="{{$value->ma_cv}}">{{$value->cv}}</option>
                         @endforeach
@@ -307,13 +307,13 @@
             <tr>
                 <td>
                     <label>Ngày về cơ quan</label>
-                    <input type="date" name="nvcqhn" required>
+                    <input type="date" name="nvcqhn">
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Công việc hiện nay</label>
-                    <select name="cvdn" style="width: 210px" required>
+                    <select name="cvdn" style="width: 210px">
                         @foreach($cv as $value)
                             <option value="{{$value->ma_cv}}">{{$value->cv}}</option>
                         @endforeach

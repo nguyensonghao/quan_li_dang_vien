@@ -37,18 +37,7 @@
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->so_the_dv }}</td>
                             <td>
-                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"
-                                data-toggle="tooltip" data-placement="left" title="Gửi email">
-                                    
-                                </span>
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"
-                                data-toggle="tooltip" data-placement="top" title="Xem thông tin">
-                                    
-                                </span>
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"
-                                data-toggle="tooltip" data-placement="bottom" title="Chuyển Đảng viên">
-                                    
-                                </span>
+                                <a class="btn btn-link">Xóa</a>
                             </td>
                         </tr>
                     @endforeach

@@ -92,14 +92,3 @@ Route::get('/detail-notify', 'NotifyController@showDetailNotify');
 Route::controller('thongtindangvien', 'ThongtinDangvienController');
 Route::get('dangvien/thongtin/{shc}', 'ThongtinDangvienController@showDangvien');
 Route::get('dangvien/quatrinh/xoa/{qt_tbl}/{id}', 'ThongtinDangvienController@actionDeleteQuatrinh');
-
-Route::get('test', function () {
-	$result = array();
-	$e1 = array('name' => 'hao', 'age' => 1);
-	$e2 = array('name' => 'nam', 'age' => 2);
-	array_push($result, $e1);
-	array_push($result, $e2);
-	print_r(array_keys($result[0]));
-});
-
-

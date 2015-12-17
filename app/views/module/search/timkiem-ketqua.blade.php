@@ -17,11 +17,17 @@
 
             <div class="action-result-search col-md-7">
                 <div class="btn-group">
-                    
+                    @if ($type == 0)
                     <a class="btn btn-primary btn-show-search" 
                     href="{{ Asset('timkiem') }}">
                         Tìm kiếm mới
                     </a>
+                    @else
+                    <a class="btn btn-primary btn-show-search" 
+                    href="{{ Asset('timkiem/nangcao') }}">
+                        Tìm kiếm mới
+                    </a>
+                    @endif
                     <a type="button" class="btn btn-custom btn-sm" 
                     href="{{ Asset('dangvien/indanhsach') }}">
                         In danh sách
