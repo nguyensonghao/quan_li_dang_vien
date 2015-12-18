@@ -38,7 +38,7 @@
         <td>{{ $value->nkl }}</td>
         <td>{{ $value->ldkl }}</td>
         <td>
-          <a class="btn btn-link btn-sm">
+          <a class="btn btn-link btn-sm" onClick="updateKyluat({{$value->id}})">
             <span class="glyphicon glyphicon-pencil"></span> 
             Sửa
           </a>
@@ -62,7 +62,7 @@
   </p>
 
   <label>Hình thức kỷ luật</label>
-  <select name=""  class="form-control">
+  <select name="ma_htkl"  class="form-control">
     @foreach ($dm_kl as $value)
       <option value="{{ $value->ma_kl }}">{{ $value->kl }}</option>
     @endforeach
@@ -70,17 +70,17 @@
 
   <div class="col-md-6">
     <label>Năm kỷ luật</label>
-    <input type="date" class="form-control">
+    <input type="text" class="form-control" name="nkl">
 
     <label>Lý do kỷ luật</label>
-    <textarea class="form-control" name=""></textarea>
+    <textarea class="form-control" name="ldkl"></textarea>
   </div>
   <div class="col-md-6">
     <label>Năm xóa kỷ luật</label>
-    <input type="date" name="" class="form-control">
+    <input type="text" name="nxkl" class="form-control">
 
     <label>Thông tin khác</label>
-    <textarea class="form-control" name=""></textarea>
+    <textarea class="form-control" name="ttk_qtkl"></textarea>
   </div>
   <div class="col-md-12">
     <center>
@@ -88,3 +88,25 @@
     </center>
   </div>
 </div>
+
+<script>
+    function updateKyluat (id) {
+      $.ajax({
+        url : 'hienthi/chinhsua',
+        type : 'post',
+        data : {id : id, table : 'qtkl_tbl'},
+        success : function (data) {
+          if (data == null) {
+            alert('Có lỗi kết nối cơ sở dữ liệu');
+          } else {
+            data = JSON.parse(data);
+            $('select[name="ma_htkl"]').val(data.ma_htkl);
+            $('input[name="nkl"]').val(data.nkl);
+            $('input[name="nxkl"]').val(data.nxkl);
+            $('textarea[name="ldkl"]').val(data.ldkl);
+            $('textarea[name="ttk_qtkl"]').val(data.ttk_qtkl);
+          }
+        }
+      })
+    }
+  </script>

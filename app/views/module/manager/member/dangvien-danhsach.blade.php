@@ -29,7 +29,7 @@
                     @foreach ($ds_dv as $value)
                         <tr>
                             <td><b>
-                                <a href="{{ Asset('information-member').'/'.$value->shcc }}" target="_blank">
+                                <a href="{{ Asset('dangvien/thongtin').'/'.$value->sohieuchuan }}" target="_blank">
                                 {{ $value->ttd }}
                                 </a>
                             </b></td>

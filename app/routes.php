@@ -92,3 +92,5 @@ Route::get('/detail-notify', 'NotifyController@showDetailNotify');
 Route::controller('thongtindangvien', 'ThongtinDangvienController');
 Route::get('dangvien/thongtin/{shc}', 'ThongtinDangvienController@showDangvien');
 Route::get('dangvien/quatrinh/xoa/{qt_tbl}/{id}', 'ThongtinDangvienController@actionDeleteQuatrinh');
+
+Route::post('dangvien/thongtin/hienthi/chinhsua', 'ThongtinDangvienController@actionThongtinChinhsua');

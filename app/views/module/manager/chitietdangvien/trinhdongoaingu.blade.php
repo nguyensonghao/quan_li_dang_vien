@@ -34,11 +34,11 @@
   <tbody>
     @foreach($ngoaingu as $value)
     <tr>
-      <td>Tiếng Anh</td>
-      <td>{{ $value->ma_td }}</td>
+      <td>{{ $value->tnn }}</td>
+      <td>{{ $value->tdnn }}</td>
       <td>{{ $value->ttk_tdnn }}</td>
       <td>
-        <a class="btn btn-link btn-sm">
+        <a class="btn btn-link btn-sm" onClick="updateNgoaingu({{$value->id}})">
           <span class="glyphicon glyphicon-pencil"></span> 
           Sửa
         </a>
@@ -63,29 +63,9 @@
     <div class="col-md-6">
       <label>Ngoại ngữ :</label>
       <select name="nn" class="form-control" required="required">
-        <option value="01"> Tiếng Anh</option>
-        <option value="02"> Tiếng Pháp</option>
-        <option value="03"> Tiếng Nga</option>
-        <option value="04"> Tiếng Trung</option>
-        <option value="05"> Tiếng Nhật</option>
-        <option value="06"> Tiếng Lào</option>
-        <option value="07"> Tiếng Cam-Pu-Chia</option>
-        <option value="08"> Tiếng Thái Lan</option>
-        <option value="09"> Tiếng Đức</option>
-        <option value="10"> Tiếng Bungari</option>
-        <option value="11"> Tiếng Bồ Đào Nha</option>
-        <option value="12"> Tiếng Tây Ban Nha</option>
-        <option value="13"> Tiếng Ba Lan</option>
-        <option value="14"> Tiếng An Ba Ni</option>
-        <option value="15"> Tiếng Hàn Quốc</option>
-        <option value="16"> Tiếng Singapore</option>
-        <option value="02"> Tiếng Ấn Độ</option>
-        <option value="02"> Tiếng Philippin</option>
-        <option value="02"> Tiếng Ytalia</option>
-        <option value="02"> Tiếng Ả-rập</option>
-        <option value="02"> Tiếng Thổ Nhĩ Kì</option>
-        <option value="02"> Tiếng Rumani</option>
-        <option value="02"> Tiếng Hungari</option>
+        @foreach ($dm_tnn as $value)
+          <option value="{{$value->ma_tnn}}">{{$value->tnn}}</option>
+        @endforeach
       </select>
       <label>Trình độ :</label>
       <select name="td" class="form-control" required="required">
@@ -96,7 +76,7 @@
     </div>
     <div class="col-md-6">
       <label>Thông tin khác :</label>
-      <textarea name="" class="form-control" rows="5"></textarea>
+      <textarea name="ttk_tdnn" class="form-control" rows="5"></textarea>
     </div>
     <div class="col-md-12">
       <center>
@@ -107,3 +87,23 @@
       </center>
     </div>
   </div>
+
+  <script>
+    function updateNgoaingu (id) {
+      $.ajax({
+        url : 'hienthi/chinhsua',
+        type : 'post',
+        data : {id : id, table : 'tdnn_tbl'},
+        success : function (data) {
+          if (data == null) {
+            alert('Có lỗi kết nối cơ sở dữ liệu');
+          } else {
+            data = JSON.parse(data);
+            $('select[name="nn"]').val(data.ma_nn);
+            $('select[name="td"]').val(data.ma_td);
+            $('textarea[name="ttk_tdnn"]').val(data.ttk_tdnn);
+          }
+        }
+      })
+    }
+  </script>

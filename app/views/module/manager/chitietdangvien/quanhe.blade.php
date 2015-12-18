@@ -40,7 +40,7 @@
         <td>{{ $value->ns_qhgd }}</td>
         <td>{{ $value->nn_qhgd }}</td>
         <td>
-          <a class="btn btn-link btn-sm">
+          <a class="btn btn-link btn-sm" onClick="updateQuanhe({{$value->id}})">
             <span class="glyphicon glyphicon-pencil"></span> 
             Sửa
           </a>
@@ -64,27 +64,27 @@
   </p>
   <div class="col-md-6">
     <label>Họ và tên</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" name="ht_qhgd">
 
     <label>Ngày sinh</label>
-    <input type="date" class="form-control">
+    <input type="date" class="form-control" name="ns_qhgd">
 
     <label>Quan hệ gia đình</label>
-    <select class="form-control">
+    <select class="form-control" name="qhgd">
       @foreach ($dm_qhgd as $value)
         <option value="{{ $value->ma_qhgd }}">{{ $value->qhgd }}</option>
       @endforeach
     </select>
 
     <label>Quốc tịch</label>
-    <select class="form-control">
+    <select class="form-control" name="qt_qhgd">
       @foreach ($dm_qg as $value)
         <option value="{{ $value->ma_qg }}">{{ $value->qg }}</option>
       @endforeach
     </select>
 
     <label>Nơi định cư</label>
-    <select class="form-control">
+    <select class="form-control" name="ndc_qhgd">
       @foreach ($dm_qg as $value)
         <option value="{{ $value->ma_qg }}">{{ $value->qg }}</option>
       @endforeach
@@ -93,19 +93,19 @@
 
   <div class="col-md-6">
     <label>Nghề nghiệp</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" name="nn_qhgd">
 
     <label>Chức vụ</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" name="cv_qhgd">
 
     <label>Nơi công tác</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" name="nct_qhgd">
 
-    <label>Nơi ở hiện nay</span>
-    <input type="text" class="form-control">
+    <label>Nơi ở hiện nay</label>
+    <input type="text" class="form-control" name="no_qhgd">
 
     <label>Thông tin khác</label>
-    <textarea class="form-control"></textarea>
+    <textarea class="form-control" name="ttk_qhgd"></textarea>
   </div>
   <div class="col-md-12">
     <center>
@@ -113,3 +113,30 @@
     </center>
   </div>
 </div>
+
+<script>
+  function updateQuanhe (id) {
+    $.ajax({
+      url : 'hienthi/chinhsua',
+      type : 'post',
+      data : {id : id, table : 'qhgd_tbl'},
+      success : function (data) {
+        if (data == null) {
+          alert('Có lỗi kết nối cơ sở dữ liệu');
+        } else {
+          data = JSON.parse(data);
+          $('input[name="ht_qhgd"]').val(data.ht_qhgd);
+          $('input[name="ns_qhgd"]').val(data.ns_qhgd);
+          $('select[name="qhgd"]').val(data.qhgd);
+          $('select[name="qt_qhgd"]').val(data.qt_qhgd);
+          $('select[name="ndc_qhgd"]').val(data.ndc_qhgd);
+          $('input[name="nn_qhgd"]').val(data.nn_qhgd);
+          $('input[name="cv_qhgd"]').val(data.cv_qhgd);
+          $('input[name="nct_qhgd"]').val(data.nct_qhgd);
+          $('input[name="no_qhgd"]').val(data.no_qhgd);
+          $('input[name="ttk_qhgd"]').val(data.ttk_qhgd);
+        }
+      }
+    })
+  }
+</script>

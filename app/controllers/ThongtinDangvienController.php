@@ -27,7 +27,9 @@ class ThongtinDangvienController extends BaseController {
 		$list['chucvucq']   = $this->user->chucvuChinhquyenDangvien($shcc);
 
 		// Lấy thông tin danh mục để hiển thị dữ liệu
-		$list['dm_tdnn']    = $this->showTrinhdoNgoaingu();
+		$listNgoaingu 	    = $this->showTrinhdoNgoaingu();
+		$list['dm_tdnn']    = $listNgoaingu['dm_tdnn'];
+		$list['dm_tnn']     = $listNgoaingu['dm_tnn'];
 		$list['dm_kt']      = $this->showKhenThuong();
 		$list['dm_kl']      = $this->showKyLuat();
 		$list['dm_cv']      = $this->showChucvuChinhquyen();
@@ -46,7 +48,10 @@ class ThongtinDangvienController extends BaseController {
 	}
 
 	public function showTrinhdoNgoaingu () {
-		return DB::table('dm_tdnn')->get();
+		$list = array();
+		$list['dm_tdnn'] = DB::table('dm_tdnn')->get();
+		$list['dm_tnn'] = DB::table('dm_tnn')->get();
+		return $list;
 	}	
 
 	public function showKhenThuong () {
@@ -96,6 +101,149 @@ class ThongtinDangvienController extends BaseController {
 		} else {
 			return Redirect::back()->with('success-delete', -1);
 		}
+	}
+
+	public function actionThongtinChinhsua () {
+		$id = $_POST['id'];
+		$table = $_POST['table'];
+		$result = DB::table($table)->where('id', $id)->first();
+		return json_encode($result);	
+	}
+
+	/*Begin Insert*/
+	public function actionInsertNgoaingu () {
+	   //Lấy thông tin từ form
+	   $tdnn_tbl = Input::all();
+	   
+	   //Insert vào dm_tdnn
+	   $check = DB::table("tdnn_tbl")->insert($tdnn_tbl);
+	  
+	}
+
+	//Thiếu 2 cột: lcd, cdcn
+	public function actionInsertChucdanh(){
+	    //Lấy thông tin từ form
+	    $qtcd_tbl = Input::all();
+	    
+	    
+	    $npdh_arr = explode('-', $qtcd_tbl['ntnpdh']);
+            
+	    //Năm
+	    $npdh = $npdh_arr[0];
+	   
+	    $qtcd_tbl['npdh'] = $npdh;
+	    
+	    //đề mặc định là Đảng - SỬA CÁI NÀY SAU.
+	    $lcd = 0;
+	    $qtcd_tbl['lcd'] = $lcd;
+	    	   	    
+	    //Insert vào dm_tdnn
+	    $check = DB::table("qtcd_tbl")->insert($qtcd_tbl);
+	    
+	    if($check){
+	        echo "inserted successful !";
+	    }
+	     
+	}
+	
+	public function actionInsertChucvuchinhquyen(){
+	    //Lấy dữ liệu từ form post lên
+	    $qtcvkn = Input::all();
+	    
+	    //$chưa biết dữ liệu cột này lấy từ đâu ? SỬA Ở ĐÂY
+	    $ma_dvqlcvkn = 0;
+	    
+	    //Đương nhiệm - Suy ra từ ngày kết thúc và thời gin hiện tại
+	    //Nếu ngày kết thúc nhỏ hơn thời gian hiện tại thì đương nhiệm = 0 
+	    //ngược lại đương nhiệm = 1;
+	    $currentDate = date("Y-m-d");
+	    
+	    if(strcmp($qtcvkn['nktcvkn'], $currentDate) < 0){
+	        $dn = 0;
+	    } else {
+	        $dn = 1;
+	    }
+	    
+
+	    $qtcvkn['dn'] = $dn;
+	    $qtcvkn['ma_dvqlcvkn'] = $ma_dvqlcvkn;
+	    
+	    //Thêm vào database
+	    $check = DB::table('qtcvkn_tbl')->insert($qtcvkn);
+	    
+        if($check){
+            echo "ok";
+        }
+	}
+	
+	public function actionInsertKhenthuong(){
+	    //lấy dữ liệu post lên từ form
+	    $khenthuong = Input::all();
+	    
+	   //insert vào bảng qtkt_tbl
+	   $check = DB::table('qtkt_tbl')->insert($khenthuong);
+	   
+	   echo "inserted";
+	}
+	
+	public function actionInsertKyluat(){
+	    //Lấy dữ liệu post lên từ form
+	    $kyluat = Input::all();
+	    
+	    //insert vào bảng qtkl_tbl
+	    $check = DB::table('qtkl_tbl')->insert($kyluat);
+	    
+	    if($check){
+	        echo "inserted";
+	    }
+	}
+	
+	public function actionInsertDienbienluong(){
+	    //Lấy dữ liệu post lên từ form
+	    $Dienbl = Input::all();
+	     	    
+	    //insert vào bảng qtkl_tbl
+	   $check = DB::table('qtdbl_tbl')->insert($Dienbl);
+	     
+	   if($check){
+	       echo "inserted";
+	   }
+	}
+	
+	public function actionInsertQuanhe(){
+	    //Lấy dữ liệu post lên từ form
+	    $quanhe = Input::all();
+	      
+	    $check = DB::table('qhgd_tbl')->insert($quanhe);
+	    
+	    if($check){
+	        echo "inserted !";
+	    }
+	}
+	
+	public function actionInsertDoanthe(){
+	    //Lấy dữ liệu post lên từ form
+	    $doanthe = Input::all();
+	    
+	    $currentDate = date("Y-m-d");
+	    if(strcmp($doanthe['nktcvdt'], $currentDate) < 0){
+	        $dn = 0;
+	    } else {
+	        $dn = 1;
+	    }
+	    
+
+	    //Hai tham số này ko biết
+	    $doanthe['dn'] = $dn;
+	    
+	    //giá trị này ko biết tính như thế nào ?
+	    $doanthe['lcd'] = 1;
+	    
+	    $check = DB::table('qtcvdt_tbl')->insert($doanthe);
+	     
+	    if($check){
+	        echo "inserted !";
+	    }
 	}
 
 }

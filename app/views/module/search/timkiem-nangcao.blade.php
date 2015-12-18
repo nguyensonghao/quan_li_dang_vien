@@ -99,16 +99,16 @@
       <div role="tabpanel" class="tab-pane" id="tthn">
         Thuộc :
         <select name="tthn">
-          @foreach ($tthn as $value)
-            <option value="{{$value->ma_tthn}}">{{$value->tthn}}</option>
+          @foreach ($ttht as $value)
+            <option value="{{$value->ma_ttht}}">{{$value->ttht}}</option>
           @endforeach
         </select>
       </div>
       <div role="tabpanel" class="tab-pane" id="ttht">
         Thuộc : 
         <select name="ttht">
-          @foreach ($ttht as $value)
-            <option value="{{$value->ma_ttht}}">{{$value->ttht}}</option>
+          @foreach ($tt as $value)
+            <option value="{{$value->ma_tt}}">{{$value->tt}}</option>
           @endforeach
         </select>
       </div>
