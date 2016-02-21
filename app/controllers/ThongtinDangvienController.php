@@ -25,6 +25,10 @@ class ThongtinDangvienController extends BaseController {
 		$list['nuocngoai']  = $this->user->nuocngoaiDangvien($shcc);
 		$list['doanthe']    = $this->user->chucvuDoantheDangvien($shcc);
 		$list['chucvucq']   = $this->user->chucvuChinhquyenDangvien($shcc);
+		$list['dienbienluong'] = $this->user->quatrinhDienbienLuong($shcc);
+		$list['daotao']     = $this->user->quatrinhDaotao($shcc);
+		$list['boiduong']   = $this->user->quatrinhBoiDuong($shcc);
+		$list['congtac']    = $this->user->quatrinhCongtac($shcc);
 
 		// Lấy thông tin danh mục để hiển thị dữ liệu
 		$listNgoaingu 	    = $this->showTrinhdoNgoaingu();

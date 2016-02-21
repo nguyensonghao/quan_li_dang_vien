@@ -32,37 +32,39 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($kyluat as $value)
+    @if (count($kyluat) == 0)
       <tr>
-        <td>{{ $value->kl }}</td>
-        <td>{{ $value->nkl }}</td>
-        <td>{{ $value->ldkl }}</td>
-        <td>
-          <a class="btn btn-link btn-sm" onClick="updateKyluat({{$value->id}})">
-            <span class="glyphicon glyphicon-pencil"></span> 
-            Sửa
-          </a>
-        </td>
-        <td>
-          <a class="btn btn-link btn-sm"
-          href="{{ Asset('dangvien/quatrinh/xoa/').'/qtkl_tbl/'.$value->id }}">
-            <span class="glyphicon glyphicon-remove"></span> 
-            Xóa
-          </a>
-        </td>
+        <td>Không có thông tin kỷ luật</td>
       </tr>
-    @endforeach
+    @else
+      @foreach ($kyluat as $value)
+        <tr>
+          <td>{{ $value->kl }}</td>
+          <td>{{ $value->nkl }}</td>
+          <td>{{ $value->ldkl }}</td>
+          <td>
+            <a class="btn btn-link btn-sm" onClick="updateKyluat({{$value->id}})">
+              <span class="glyphicon glyphicon-pencil"></span> 
+              Sửa
+            </a>
+          </td>
+          <td>
+            <a class="btn btn-link btn-sm"
+            href="{{ Asset('dangvien/quatrinh/xoa/').'/qtkl_tbl/'.$value->id }}">
+              <span class="glyphicon glyphicon-remove"></span> 
+              Xóa
+            </a>
+          </td>
+        </tr>
+      @endforeach
+    @endif
+    
   </tbody>
 </table>
 
 <div class="col-md-12 new">
-  <p class="title-text">
-    <span class="glyphicon glyphicon-plus"></span> 
-    Thêm mới dữ liệu
-  </p>
-
   <label>Hình thức kỷ luật</label>
-  <select name="ma_htkl"  class="form-control">
+  <select name="ma_htkl"  class="form-control" disabled="true">
     @foreach ($dm_kl as $value)
       <option value="{{ $value->ma_kl }}">{{ $value->kl }}</option>
     @endforeach
@@ -70,22 +72,17 @@
 
   <div class="col-md-6">
     <label>Năm kỷ luật</label>
-    <input type="text" class="form-control" name="nkl">
+    <input type="text" class="form-control" name="nkl" disabled="true">
 
     <label>Lý do kỷ luật</label>
-    <textarea class="form-control" name="ldkl"></textarea>
+    <textarea class="form-control" name="ldkl" disabled="true"></textarea>
   </div>
   <div class="col-md-6">
     <label>Năm xóa kỷ luật</label>
-    <input type="text" name="nxkl" class="form-control">
+    <input type="text" name="nxkl" class="form-control" disabled="true">
 
     <label>Thông tin khác</label>
-    <textarea class="form-control" name="ttk_qtkl"></textarea>
-  </div>
-  <div class="col-md-12">
-    <center>
-      <button type="button" class="btn btn-primary btn-sm">Ghi lại</button>
-    </center>
+    <textarea class="form-control" name="ttk_qtkl" disabled="true"></textarea>
   </div>
 </div>
 

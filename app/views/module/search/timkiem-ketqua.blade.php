@@ -36,7 +36,10 @@
                     href="{{ Asset('dangvien/email') }}" target="_blank">
                         Gửi email
                     </a>
-                    <button type="button" class="btn btn-custom btn-sm">In sổ cái</button>
+                    <a type="button" class="btn btn-custom btn-sm"
+                    href="{{ Asset('dangvien/insocai') }}">
+                        In sổ cái
+                    </button>
 
                     <a href="{{Asset('dangvien/xuatdulieu')}}" class="btn btn-custom btn-sm" target="_blank">
                         Xuất dữ liệu

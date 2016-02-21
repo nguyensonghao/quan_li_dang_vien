@@ -116,32 +116,6 @@
           Quá trình công tác
         </a>
       </li>
-      <li role="presentation">
-        <a href="#giandoanthamnien" aria-controls="giandoanthamnien"role="tab" data-toggle="tab">
-          Gián đoạn thâm niên
-        </a>
-      </li>
-      <li class="title">Bảo hiểm xã hội</li>
-      <li role="presentation">
-        <a href="#thongtinbhxh" aria-controls="thongtinbhxh"role="tab" data-toggle="tab">
-          Thông tin BHXH
-        </a>
-      </li>
-      <li role="presentation">
-        <a href="#dulieutruoc" aria-controls="dulieutruoc"role="tab" data-toggle="tab">
-          Dữ liệu trước 4/1993
-        </a>
-      </li>
-      <li role="presentation">
-        <a href="#intokhai" aria-controls="intokhai"role="tab" data-toggle="tab">
-          In tờ khai bảo hiểm xã hội
-        </a>
-      </li>
-      <li role="presentation">
-        <a href="#inso" aria-controls="inso"role="tab" data-toggle="tab">
-          In sổ BHXH
-        </a>
-      </li>
     </ul>
 
   </div>
@@ -195,32 +169,16 @@
         </div>
         
         <div role="tabpanel" class="tab-pane" id="quatrinhdaotao">
-            
+          @include('module.manager.chitietdangvien.quatrinhdaotao')  
         </div>
         
         <div role="tabpanel" class="tab-pane" id="quatrinhcongtac">
-            
+          @include('module.manager.chitietdangvien.quatrinhcongtac')    
         </div>
         
         <div role="tabpanel" class="tab-pane" id="quatrinhboiduong">
-            
-        </div>
-           
-        <div role="tabpanel" class="tab-pane" id="giandoanthamnien">
-            
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="dulieutruoc">
-            
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="intokhai">
-            
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="inso">
-            
-        </div>
+          @include('module.manager.chitietdangvien.quatrinhboiduong')  
+        </div>           
       </div>
     </div>
   </div>

@@ -148,8 +148,20 @@
   td {
     padding: 4px !important;
     text-align: center;
-    background: white;
     border-color: #DCE0E6 !important;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  tr {
+    background: white;
+    cursor: pointer;
+  }
+
+  .table-hover tbody tr:nth-child(2n+2) {
+      background: #dff0d8;
   }
 
   td .btn {
@@ -170,6 +182,7 @@
     padding: 10px;
     background-color: white;
     box-shadow: 1px 1px 0 rgba(199, 196, 191, 0.62), 1px 1px 3px rgba(210, 207, 202, 0.73);
+    padding-top: 0px;
   }
 
   .title-text {
@@ -194,8 +207,12 @@
     font-size: 13px !important;
   }
 
-  thead th {
+  /*thead th {
     text-transform: uppercase;
+  }*/
+
+  thead {
+    border-bottom: 1px solid #EAEAEA;
   }
 
   .btn-register {

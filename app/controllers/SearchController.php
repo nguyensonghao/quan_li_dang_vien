@@ -9,6 +9,7 @@
 		public function __construct () {
 			$this->user = new User();
 			$this->servicesController = new ServicesController();
+			$this->exportData = new ExportDataController();
 		}
 		
 		// Hiển thị tìm kiếm cơ bản
@@ -86,7 +87,9 @@
 			} else {
 				$date = null;
 			}
-			$data = $this->user->timkiemDangvien($condition, $cqtd, $date);
+
+			$listOfField = ["*"];
+			$data = $this->user->timkiemDangvien($condition, $cqtd, $date, $listOfField);
 			return $data;
 		}
 
@@ -111,7 +114,7 @@
 			} else {
 				$date = null;
 			}
-			$data = $this->user->timkiemDangvienTheoTruong($condition, $cqtd, $date, $listOfField);
+			$data = $this->user->timkiemDangvien($condition, $cqtd, $date, $listOfField);
 			return $data;
 		}
 
@@ -123,7 +126,10 @@
 			foreach ($result as $key => $value) {
 				$data[$key] = (array) $value;
 			}
-			$this->exportData->actionExportExcelFromArray($data);
+			// $this->exportData->actionExportExcelFromArray($data);
+			echo '<pre>';
+			print_r($data[0]);
+			echo '</pre>';
 		}
 
 		public function exportInformationOfOneMember ($shc) {
@@ -150,6 +156,16 @@
 			Session::set('conditionSearchAdvance', $condition);
 			Session::forget('conditionSearchSimple');
 			return Redirect::to('timkiem/ketqua');
+		}
+
+		public function actionPrintSocai () {
+			$this->exportData = new ExportDataController();
+			$result = $this->querySearchSimple()['all'];
+			$data = [];
+			foreach ($result as $key => $value) {
+				$data[$key] = (array) $value;
+			}
+			$this->exportData->inSocai($data);
 		}
 
 

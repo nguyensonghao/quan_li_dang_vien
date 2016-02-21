@@ -41,42 +41,32 @@
 </table>
 
 <div class="col-md-12 new">
-  <p class="title-text">
-    <span class="glyphicon glyphicon-plus"></span> 
-    Thêm mới dữ liệu
-  </p>
-
   <div class="col-md-6">
     <label>Đơn vị quản lí</label>
-    <select name="nn" class="form-control" required="required">
+    <select name="nn" class="form-control" disabled="true">
       @foreach($dm_cv as $value)
           <option value="{{ $value->ma_cv }}">{{ $value->cv }}</option>
       @endforeach
     </select>
 
     <label>Ngày bổ nhiệm</label>
-    <input type="date" name="" class="form-control">
+    <input type="date" name="" class="form-control" disabled="true">
 
     <label>Ngày kết thúc</label>
-    <input type="date" name="" class="form-control">
+    <input type="date" name="" class="form-control" disabled="true">
 
     <label>Chức vụ</label>
-    <select name="nn" class="form-control" required="required">
+    <select name="nn" class="form-control" disabled="true">
       @foreach($dm_cv as $value)
           <option value="{{ $value->ma_cv }}">{{ $value->cv }}</option>
       @endforeach
     </select>
     
     <label>Hệ số phụ cấp</label>
-    <input type="number" name="" class="form-control">
+    <input type="number" name="" class="form-control" disabled="true">
   </div>
   <div class="col-md-6">
     <label>Thông tin khác</label>
-    <textarea name="" class="form-control" rows="3"></textarea>
-  </div>
-  <div class="col-md-12">
-    <center>
-      <button type="button" class="btn btn-primary btn-sm">Ghi lại</button>
-    </center>
+    <textarea name="" class="form-control" rows="3" disabled="true"></textarea>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="title-page">
-  <p class="title">Chức vụ chính quyền</p>
+  <p class="title">Quá trình bồi dưỡng</p>
   <p>
     <span class="username">{{ $dangvien->ttd }}</span> 
     <span class="date">({{ $dangvien->ntns }})</span> 
@@ -11,20 +11,18 @@
   <thead class="bg-primary">
     <tr>
       <th>Thời gian</th>
-      <th>Biên chế tại đơn vị/Nơi làm việc</th>
-      <th>Công việc đảm nhận</th>
-      <th>Diện cán bộ/Tình trạng công tác</th>
+      <th>Nơi bồi dưỡng</th>
+      <th>Nội dung</th>
       <th>Sửa</th>
       <th>Xóa</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($congtac as $key => $value)
+    @foreach ($boiduong as $key => $value)
     <tr>
-      <td>{{ $value['tgbd_qtct'] }} > {{ $value['tgkt_qtct'] }}</td>
-      <td>{{ $value['bctdv'] }} / {{ $value['nlv'] }}</td>
-      <td>{{ $value['cvdn'] }}</td>
-      <td>{{ $value['dcb'] }} / {{ $value['tt'] }}</td>
+      <td>{{ $value['tgbd_bd'] }} > {{ $value['tgkt_bd'] }}</td>
+      <td>{{ $value['nbd_qtbd'] }}</td>
+      <td>{{ $value['ndbd'] }}</td>
       <td>
         <a class="btn btn-link btn-sm">
           <span class="glyphicon glyphicon-pencil"></span> 

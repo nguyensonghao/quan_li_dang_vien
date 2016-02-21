@@ -1,5 +1,5 @@
 <div class="title-page">
-  <p class="title">Chức vụ chính quyền</p>
+  <p class="title">Quá trình đào tạo</p>
   <p>
     <span class="username">{{ $dangvien->ttd }}</span> 
     <span class="date">({{ $dangvien->ntns }})</span> 
@@ -11,20 +11,18 @@
   <thead class="bg-primary">
     <tr>
       <th>Thời gian</th>
-      <th>Biên chế tại đơn vị/Nơi làm việc</th>
-      <th>Công việc đảm nhận</th>
-      <th>Diện cán bộ/Tình trạng công tác</th>
+      <th>Văn bằng</th>
+      <th>Chuyên ngành</th>
       <th>Sửa</th>
       <th>Xóa</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($congtac as $key => $value)
+    @foreach ($daotao as $key => $value)
     <tr>
-      <td>{{ $value['tgbd_qtct'] }} > {{ $value['tgkt_qtct'] }}</td>
-      <td>{{ $value['bctdv'] }} / {{ $value['nlv'] }}</td>
-      <td>{{ $value['cvdn'] }}</td>
-      <td>{{ $value['dcb'] }} / {{ $value['tt'] }}</td>
+      <td>{{ $value['tgbd_dtcm'] }} > {{ $value['tgkt_dtcm'] }}</td>
+      <td>{{ $value['vbdt'] }}</td>
+      <td>{{ $value['cn'] }}</td>
       <td>
         <a class="btn btn-link btn-sm">
           <span class="glyphicon glyphicon-pencil"></span> 
@@ -47,7 +45,5 @@
     <span class="glyphicon glyphicon-plus"></span> 
     Thêm mới dữ liệu
   </p>
-
-  
     
 </div>

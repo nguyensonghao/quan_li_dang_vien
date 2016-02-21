@@ -140,12 +140,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $nuocngoai;
 	}
 
-	// public function dienbienluongDangvien ($shcc) {
-	// 	$dienbien = DB::table('qtdbl_tbl')
-	// 	->where('shcc', $shcc)
-	// 	->join()
-	// }
-
 	public function chucvuDoantheDangvien ($shcc) {
 		$doanthe = DB::table('qtcvdt_tbl')
 		->where('shcc', $shcc)
@@ -160,10 +154,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		->join('dm_cv', 'dm_cv.ma_cv', '=', 'qtcvkn_tbl.ma_cv')
 		->get();
 		return $chucvu;
-	}
-	
-	public function quatrinhCongtacDangvien ($shcc) {
-		
 	}
 
 	// Hàm trả về danh muc đảng viên
@@ -215,125 +205,102 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $list;
 	}
 
-	public function timkiemDangvien ($condition, $cqtd, $date) {
+	public function timkiemDangvien ($condition, $cqtd, $date, $listOfField) {
 		// Kiểm tra thông tin tìm kiếm giới tính
 		if (!isset($condition['gt-nu']))
 			$condition['gt-nu'] = -1;
 		if (!isset($condition['gt-nam'])) 
 			$condition['gt-nam'] = -1;
-		$gtNu = $condition['gt-nu'];
+
+		$gtNu  = $condition['gt-nu'];
 		$gtNam = $condition['gt-nam'];
 
 		// Kiểm tra số tuổi nhập vào
 		if ($date == null) {
-			$result = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")
+			$query = DB::table('soyeu_tbl')
+			->leftJoin('dm_nm', 'soyeu_tbl.ma_nm', '=', 'dm_nm.ma_nm') // Lấy nhóm máu
+			->leftJoin('dm_dt', 'soyeu_tbl.ma_dt', '=', 'dm_dt.ma_dt') // lấy dân tộc 
+			->leftJoin('dm_tg', 'soyeu_tbl.ma_tg', '=', 'dm_tg.ma_tg') // Lấy mã tôn giáo
+			->leftJoin('dm_tpxt', 'soyeu_tbl.ma_tpxt', '=', 'dm_tpxt.ma_tpxt') // Lấy mã thành phần xuất thân
+			->leftJoin('dm_tb', 'soyeu_tbl.ma_tb', '=', 'dm_tb.ma_tb') // Lấy mã thương binh 
+			->leftJoin('dm_tdhv', 'soyeu_tbl.ma_tdhv', '=', 'dm_tdhv.ma_tdhv') // Lấy mã trình độ học vấn
+			->leftJoin('dm_tdth', 'soyeu_tbl.ma_tdth', '=', 'dm_tdth.ma_tdth') // Lấy mã trình tin học
+			->leftJoin('dm_tdll', 'soyeu_tbl.ma_tdllct', '=', 'dm_tdll.ma_tdll') // Lấy mã trình độ lí luận
+			->leftJoin('dm_tdql', 'soyeu_tbl.ma_tdqlnn', '=', 'dm_tdql.ma_tdql') // Lấy mã trình độ quả lí
+			->leftJoin('dm_ttsk', 'soyeu_tbl.ma_ttsk', '=', 'dm_ttsk.ma_ttsk') // Lấy tình trạng sức khỏe
+			->leftJoin('dm_dcb', 'soyeu_tbl.dcb', '=', 'dm_dcb.ma_dcb') // Lấy diện cán bộ
+			->leftJoin('dm_tt', 'soyeu_tbl.tt', '=', 'dm_tt.ma_tt') // Lấy tình trạng.. nghỉ hưu..
+			->leftJoin('dm_ttht', 'soyeu_tbl.ttht', '=', 'dm_ttht.ma_ttht') // Lấy tình trang hiện tại .. nghỉ thai sản, đi nước ngoài
+			->leftJoin('dm_tthn', 'soyeu_tbl.tthn', '=', 'dm_tthn.ma_tthn') // Lấy tình trạng hôn nhân
+			->leftJoin('dm_kcb', 'soyeu_tbl.kcb', '=', 'dm_kcb.ma_kcb') // Lấy khối cán bộ .. giảng dạy, hình chính
+			->leftJoin('dm_dd', 'soyeu_tbl.ma_hktt', '=', 'dm_dd.ma_huyen')
+			->leftJoin('dm_gdcs', 'soyeu_tbl.ma_gdtdcs', '=', 'dm_gdcs.ma_gdcs')
+			->leftJoin('dm_dv', 'soyeu_tbl.ma_dvql', '=', 'dm_dv.ma_dv')
+			->leftJoin('dm_ttp', 'soyeu_tbl.ma_ns', '=', 'dm_ttp.ma_ttp')
+			->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("soyeu_tbl.tt", "like", "%".$condition['tt']."%")->where("soyeu_tbl.kcb", "like", "%".$condition['kcb']."%")->where("soyeu_tbl.dcb", "like", "%".$condition['dcb']."%")
 			->where(function ($query) use ($gtNu, $gtNam) {
 				$query->where('gt', $gtNu)
    				->orWhere('gt', $gtNam);	
-   			})->paginate(20);
-			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")
-			->where(function ($query) use ($gtNu, $gtNam) {
-				$query->where('gt', $gtNu)
-   				->orWhere('gt', $gtNam);	
-   			})->get();
+   			});
+
+			// Thêm các trường thông tin cần lấy khi tìm kiếm
+   			foreach ($listOfField as $key => $value) {
+   				$query = $query->addSelect($value);
+   			}
+
+   			$all    = $query->get();
+   			$result = $query->paginate(20);
 			$number = count($all);
-			$data = array(
-				'result' => $result, 
+			$data   = array(
+				'result'       => $result, 
 				'numberResult' => $number,
-				'all' => $all
+				'all'          => $all
 			);
 		} else {
-			$result = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")
+			$query = DB::table('soyeu_tbl')
+			->leftJoin('dm_nm', 'soyeu_tbl.ma_nm', '=', 'dm_nm.ma_nm') // Lấy nhóm máu
+			->leftJoin('dm_dt', 'soyeu_tbl.ma_dt', '=', 'dm_dt.ma_dt') // lấy dân tộc 
+			->leftJoin('dm_tg', 'soyeu_tbl.ma_tg', '=', 'dm_tg.ma_tg') // Lấy mã tôn giáo
+			->leftJoin('dm_tpxt', 'soyeu_tbl.ma_tpxt', '=', 'dm_tpxt.ma_tpxt') // Lấy mã thành phần xuất thân
+			->leftJoin('dm_tb', 'soyeu_tbl.ma_tb', '=', 'dm_tb.ma_tb') // Lấy mã thương binh 
+			->leftJoin('dm_tdhv', 'soyeu_tbl.ma_tdhv', '=', 'dm_tdhv.ma_tdhv') // Lấy mã trình độ học vấn
+			->leftJoin('dm_tdth', 'soyeu_tbl.ma_tdth', '=', 'dm_tdth.ma_tdth') // Lấy mã trình tin học
+			->leftJoin('dm_tdll', 'soyeu_tbl.ma_tdllct', '=', 'dm_tdll.ma_tdll') // Lấy mã trình độ lí luận
+			->leftJoin('dm_tdql', 'soyeu_tbl.ma_tdqlnn', '=', 'dm_tdql.ma_tdql') // Lấy mã trình độ quả lí
+			->leftJoin('dm_ttsk', 'soyeu_tbl.ma_ttsk', '=', 'dm_ttsk.ma_ttsk') // Lấy tình trạng sức khỏe
+			->leftJoin('dm_dcb', 'soyeu_tbl.dcb', '=', 'dm_dcb.ma_dcb') // Lấy diện cán bộ
+			->leftJoin('dm_tt', 'soyeu_tbl.tt', '=', 'dm_tt.ma_tt') // Lấy tình trạng.. nghỉ hưu..
+			->leftJoin('dm_ttht', 'soyeu_tbl.ttht', '=', 'dm_ttht.ma_ttht') // Lấy tình trang hiện tại .. nghỉ thai sản, đi nước ngoài
+			->leftJoin('dm_tthn', 'soyeu_tbl.tthn', '=', 'dm_tthn.ma_tthn') // Lấy tình trạng hôn nhân
+			->leftJoin('dm_kcb', 'soyeu_tbl.kcb', '=', 'dm_kcb.ma_kcb') // Lấy khối cán bộ .. giảng dạy, hình chính
+			->leftJoin('dm_dd', 'soyeu_tbl.ma_hktt', '=', 'dm_dd.ma_huyen')
+			->leftJoin('dm_gdcs', 'soyeu_tbl.ma_gdtdcs', '=', 'dm_gdcs.ma_gdcs')
+			->leftJoin('dm_dv', 'soyeu_tbl.ma_dvql', '=', 'dm_dv.ma_dv')
+			->leftJoin('dm_ttp', 'soyeu_tbl.ma_ns', '=', 'dm_ttp.ma_ttp')
+			->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("soyeu_tbl.tt", "like", "%".$condition['tt']."%")->where("soyeu_tbl.kcb", "like", "%".$condition['kcb']."%")->where("soyeu_tbl.dcb", "like", "%".$condition['dcb']."%")
 			->where(function ($query) use ($gtNu, $gtNam) {
 				$query->where('gt', $gtNu)
    				->orWhere('gt', $gtNam);	
    			})
-			->where('ntns', '<', $date['tu'])->Where('ntns', '>', $date['den'])->paginate(20);
-			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")
-			->where(function ($query) use ($gtNu, $gtNam) {
-				$query->where('gt', $gtNu)
-   				->orWhere('gt', $gtNam);	
-   			})
-			->where('ntns', '<', $date['tu'])->Where('ntns', '>', $date['den'])->get();
+			->where('ntns', '<', $date['tu'])->Where('ntns', '>', $date['den']);
+
+			// Thêm các trường thông tin cần lấy khi tìm kiếm
+   			foreach ($listOfField as $key => $value) {
+   				$query = $query->addSelect($value);
+   			}
+
+			$all    = $query->get();
+			$result = $query->paginate(20);
 			$number = count($all);
-			$data = array(
-				'result' => $result, 
+			$data   = array(
+				'result'       => $result, 
 				'numberResult' => $number,
-				'all' => $all
+				'all'          => $all
 			);
 		}
 
 		
 		return $data;
-	}
-
-	public function timkiemDangvienTheoTruong ($condition, $cqtd, $date, $listOfField) {
-		// Kiểm tra thông tin tìm kiếm giới tính
-		if (!isset($condition['gt-nu']))
-			$condition['gt-nu'] = -1;
-		if (!isset($condition['gt-nam'])) 
-			$condition['gt-nam'] = -1;
-		// Kiểm tra số tuổi nhập vào
-		$gtNu = $condition['gt-nu'];
-		$gtNam = $condition['gt-nam'];
-		if ($date == null) {
-			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")
-			->where(function ($query) use ($gtNu, $gtNam) {
-				$query->where('gt', $gtNu)
-   				->orWhere('gt', $gtNam);	
-   			})
-			// ->select($listOfField)
-			->leftJoin('dm_nm', 'soyeu_tbl.ma_nm', '=', 'dm_nm.ma_nm') // Lấy nhóm máu
-			->leftJoin('dm_dt', 'soyeu_tbl.ma_dt', '=', 'dm_dt.ma_dt') // lấy dân tộc 
-			->leftJoin('dm_tg', 'soyeu_tbl.ma_tg', '=', 'dm_tg.ma_tg') // Lấy mã tôn giáo
-			->leftJoin('dm_tpxt', 'soyeu_tbl.ma_tpxt', '=', 'dm_tpxt.ma_tpxt') // Lấy mã thành phần xuất thân
-			->leftJoin('dm_tb', 'soyeu_tbl.ma_tb', '=', 'dm_tb.ma_tb') // Lấy mã thương binh 
-			->leftJoin('dm_tdhv', 'soyeu_tbl.ma_tdhv', '=', 'dm_tdhv.ma_tdhv') // Lấy mã trình độ học vấn
-			->leftJoin('dm_tdth', 'soyeu_tbl.ma_tdth', '=', 'dm_tdth.ma_tdth') // Lấy mã trình tin học
-			->leftJoin('dm_tdll', 'soyeu_tbl.ma_tdllct', '=', 'dm_tdll.ma_tdll') // Lấy mã trình độ lí luận
-			->leftJoin('dm_tdql', 'soyeu_tbl.ma_tdqlnn', '=', 'dm_tdql.ma_tdql') // Lấy mã trình độ quả lí
-			->leftJoin('dm_ttsk', 'soyeu_tbl.ma_ttsk', '=', 'dm_ttsk.ma_ttsk') // Lấy tình trạng sức khỏe
-			->leftJoin('dm_dcb', 'soyeu_tbl.dcb', '=', 'dm_dcb.ma_dcb') // Lấy diện cán bộ
-			->leftJoin('dm_tt', 'soyeu_tbl.tt', '=', 'dm_tt.ma_tt') // Lấy tình trạng.. nghỉ hưu..
-			->leftJoin('dm_ttht', 'soyeu_tbl.ttht', '=', 'dm_ttht.ma_ttht') // Lấy tình trang hiện tại .. nghỉ thai sản, đi nước ngoài
-			->leftJoin('dm_tthn', 'soyeu_tbl.tthn', '=', 'dm_tthn.ma_tthn') // Lấy tình trạng hôn nhân
-			->leftJoin('dm_kcb', 'soyeu_tbl.kcb', '=', 'dm_kcb.ma_kcb') // Lấy khối cán bộ .. giảng dạy, hình chính
-			->leftJoin('dm_dd', 'soyeu_tbl.ma_hktt', '=', 'dm_dd.ma_huyen')
-			->leftJoin('dm_gdcs', 'soyeu_tbl.ma_gdtdcs', '=', 'dm_gdcs.ma_gdcs')
-			->leftJoin('dm_dv', 'soyeu_tbl.ma_dvql', '=', 'dm_dv.ma_dv')
-			->leftJoin('qtdtcm_tbl', 'soyeu_tbl.shcc', '=', 'qtdtcm_tbl.shcc')
-			->get();
-		} else {
-			$all = DB::table('soyeu_tbl')->where("ttd", "like", "%".$condition['hoten']."%")->where("cqtd", $cqtd)->where("sohieuchuan", "like", "%".$condition['shc']."%")->where("tt", "like", "%".$condition['tt']."%")->where("kcb", "like", "%".$condition['kcb']."%")->where("dcb", "like", "%".$condition['dcb']."%")
-			->where(function ($query) use ($gtNu, $gtNam) {
-				$query->where('gt', $gtNu)
-   				->orWhere('gt', $gtNam);	
-   			})
-			->where('ntns', '<', $date['tu'])->Where('ntns', '>', $date['den'])
-			// ->select($listOfField)
-			->leftJoin('dm_nm', 'soyeu_tbl.ma_nm', '=', 'dm_nm.ma_nm') // Lấy nhóm máu
-			->leftJoin('dm_dt', 'soyeu_tbl.ma_dt', '=', 'dm_dt.ma_dt') // lấy dân tộc 
-			->leftJoin('dm_tg', 'soyeu_tbl.ma_tg', '=', 'dm_tg.ma_tg') // Lấy mã tôn giáo
-			->leftJoin('dm_tpxt', 'soyeu_tbl.ma_tpxt', '=', 'dm_tpxt.ma_tpxt') // Lấy mã thành phần xuất thân
-			->leftJoin('dm_tb', 'soyeu_tbl.ma_tb', '=', 'dm_tb.ma_tb') // Lấy mã thương binh 
-			->leftJoin('dm_tdhv', 'soyeu_tbl.ma_tdhv', '=', 'dm_tdhv.ma_tdhv') // Lấy mã trình độ học vấn
-			->leftJoin('dm_tdth', 'soyeu_tbl.ma_tdth', '=', 'dm_tdth.ma_tdth') // Lấy mã trình tin học
-			->leftJoin('dm_tdll', 'soyeu_tbl.ma_tdllct', '=', 'dm_tdll.ma_tdll') // Lấy mã trình độ lí luận
-			->leftJoin('dm_tdql', 'soyeu_tbl.ma_tdqlnn', '=', 'dm_tdql.ma_tdql') // Lấy mã trình độ quả lí
-			->leftJoin('dm_ttsk', 'soyeu_tbl.ma_ttsk', '=', 'dm_ttsk.ma_ttsk') // Lấy tình trạng sức khỏe
-			->leftJoin('dm_dcb', 'soyeu_tbl.dcb', '=', 'dm_dcb.ma_dcb') // Lấy diện cán bộ
-			->leftJoin('dm_tt', 'soyeu_tbl.tt', '=', 'dm_tt.ma_tt') // Lấy tình trạng.. nghỉ hưu..
-			->leftJoin('dm_ttht', 'soyeu_tbl.ttht', '=', 'dm_ttht.ma_ttht') // Lấy tình trang hiện tại .. nghỉ thai sản, đi nước ngoài
-			->leftJoin('dm_tthn', 'soyeu_tbl.tthn', '=', 'dm_tthn.ma_tthn') // Lấy tình trạng hôn nhân
-			->leftJoin('dm_kcb', 'soyeu_tbl.kcb', '=', 'dm_kcb.ma_kcb') // Lấy khối cán bộ .. giảng dạy, hình chính
-			->leftJoin('dm_dd', 'soyeu_tbl.ma_hktt', '=', 'dm_dd.ma_huyen')
-			->leftJoin('dm_gdcs', 'soyeu_tbl.ma_gdtdcs', '=', 'dm_gdcs.ma_gdcs')
-			->leftJoin('dm_dv', 'soyeu_tbl.ma_dvql', '=', 'dm_dv.ma_dv')
-			->leftJoin('qtdtcm_tbl', 'soyeu_tbl.shcc', '=', 'qtdtcm_tbl.shcc')
-			->get();
-		}
-
-		return $all;
 	}
 
 	public function timkiemDangvienNangcao ($condition) {
@@ -589,4 +556,87 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $result;
 	}
 
+	public function thongtinChucvu ($shcc) {
+		$result =  DB::table('soyeu_tbl')->where('soyeu_tbl.shcc', $shcc)
+		->leftJoin('qtcvkn_tbl', 'soyeu_tbl.shcc', '=', 'qtcvkn_tbl.shcc')
+		->leftJoin('dm_cv', 'qtcvkn_tbl.ma_cv', '=', 'dm_cv.ma_cv')
+		->get();
+		
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;
+	}
+
+	public function thongtinQuequan ($ma_ns) {
+		$result = DB::table('dm_dd')->where('ma_huyen', $ma_ns)
+		->join('dm_ttp', 'dm_dd.ma_tinh', '=', 'dm_ttp.ma_ttp', 'left')->get();
+		
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;
+	}
+
+	public function quatrinhDienbienLuong ($shcc) {
+		$result = DB::table('qtdbl_tbl')->where('shcc', $shcc)
+		->leftJoin('dm_ngach', 'dm_ngach.ma_ngach', '=', 'qtdbl_tbl.ma_ngach')->get();
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;
+	}	
+
+	public function quatrinhDaotao ($shcc) {
+		$result = DB::table('qtdtcm_tbl')->where('shcc', $shcc)
+		->leftJoin('dm_cn', 'dm_cn.ma_cn', '=', 'qtdtcm_tbl.ma_cndt')
+		->leftJoin('dm_vbdt', 'dm_vbdt.ma_vbdt', '=', 'qtdtcm_tbl.vbdtcm')
+		->get();
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;
+	}
+
+	public function quatrinhCongtac ($shcc) {
+		$result = DB::table('qtct_tbl')->where('shcc', $shcc)
+		->leftJoin('dm_dcb', 'dm_dcb.ma_dcb', '=', 'qtct_tbl.ma_dcb')
+		->leftJoin('dm_tt', 'dm_tt.ma_tt', '=', 'qtct_tbl.ma_ttct')->get();
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;
+	}
+
+	public function quatrinhBoiDuong ($shcc) {
+		$result = DB::table('qtbd_tbl')->where('shcc', $shcc)->get();
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;	
+	}
+
+	public function quatrinhKhenthuong ($shcc) {
+		$result = $this->khenthuongDangvien($shcc);
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;	
+	}
+
+	public function quatrinhNuocngoai ($shcc) {
+		$result = $this->nuocngoaiDangvien($shcc);
+		$data = [];
+		foreach ($result as $key => $value) {
+			$data[$key] = (array) $value;
+		}
+		return $data;	
+	}
 }

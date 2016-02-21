@@ -44,6 +44,7 @@ Route::get('timkiem', 'SearchController@showSearchSimple');
 Route::get('timkiem/nangcao', 'SearchController@showSearchAdvance');
 Route::get('timkiem/ketqua', 'SearchController@showSearchResult');
 Route::get('dangvien/indanhsach', 'SearchController@actionExportExcel');
+Route::get('dangvien/insocai', 'SearchController@actionPrintSocai');
 Route::get('dangvien/email', 'SearchController@actionSendMail');
 Route::get('export-dv', 'SearchController@exportListDv');
 Route::get('xuatdulieu/{shc}', 'SearchController@exportInformationOfOneMember');
@@ -94,3 +95,35 @@ Route::get('dangvien/thongtin/{shc}', 'ThongtinDangvienController@showDangvien')
 Route::get('dangvien/quatrinh/xoa/{qt_tbl}/{id}', 'ThongtinDangvienController@actionDeleteQuatrinh');
 
 Route::post('dangvien/thongtin/hienthi/chinhsua', 'ThongtinDangvienController@actionThongtinChinhsua');
+
+Route::get('demo', function () {
+	// $user = new User();
+	// print_r($user->test('sohieuchuan', 'ma_dt'));
+	$string = "'sohieuchuan', 'ttd'";
+	$string = ['sohieuchuan', 'ttd'];
+	$query = DB::table('soyeu_tbl')->select('ma_dt');
+	foreach ($string as $key => $value) {
+		$query = $query->addSelect($value);
+	}
+
+	$result = $query->first();
+	print_r($result);
+});
+
+Route::controller('form', 'FormController');
+Route::get('bieumau1', 'FormController@bieumau1');
+Route::get('bieumau2', 'FormController@bieumau2');
+Route::get('bieumau3', 'FormController@bieumau3');
+Route::get('bieumau4', 'FormController@bieumau4');
+Route::get('bieumau5', 'FormController@bieumau5');
+Route::get('bieumau6', 'FormController@bieumau6');
+Route::get('bieumau7A', 'FormController@bieumau7A');
+Route::get('bieumau7B', 'FormController@bieumau7B');
+Route::get('bieumau8', 'FormController@bieumau8');
+Route::get('bieumau9', 'FormController@bieumau9');
+Route::get('bieumau10', 'FormController@bieumau10');
+Route::get('bieumau11', 'FormController@bieumau11');
+
+
+
+

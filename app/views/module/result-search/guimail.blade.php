@@ -3,75 +3,9 @@
 <head>
 	<title>Gửi email</title>
 	{{ HTML::style('libs/bootstrap/css/bootstrap.css') }}
+	{{ HTML::style('libs/css/module/email.css') }}
     {{ HTML::script('libs/bootstrap/js/jquery-2.1.3.min.js') }}
     {{ HTML::script('libs/bootstrap/js/bootstrap.js') }}
-    <style type="text/css">
-		.container {
-			padding-top: 6px;
-		}
-
-		.panel-heading {
-			border-radius: 0;
-		}
-
-		.checkbox {
-			margin: 0 !important;
-		}
-
-		.panel {
-			height: 550px !important;
-			overflow: auto;
-			border-color: #ccc;
-    		border-top: 0;
-		}
-
-		.panel-body {
-			padding: 6px;
-		}
-
-		.stt {
-			font-weight: bold;
-		    font-size: 11px !important;
-		}
-
-		.title {
-			margin: 0 !important;
-		    background: #121213;
-		    padding: 10px;
-		    color: white;
-		}
-
-		.title img {
-			position: absolute;
-		    right: 150px;
-		    top: 10px;
-		}
-
-		.modal input, .modal textarea {
-			width: 100%;
-		    border: 0;
-		    border-bottom: 1px solid #ccc;
-		    outline: none !important;
-		}
-
-		.modal textarea {
-			border-bottom: none !important;
-		}
-
-		.modal .btn {
-			border-radius: 0 !important;
-		}
-
-		.modal-content {
-			border-radius: 0 !important;
-		}
-
-		.modal-header {
-			background: #337ab7;
-		    text-align: center;
-		    color: white;
-		}
-    </style>
 </head>
 <body style="background: url('image/noise.png')">
 	<div class="container">
@@ -149,38 +83,8 @@
 				Gửi email
 			</button>
 			<button type="button" class="btn btn-custom btn_close">Thoát</button>
-		</div>
-		
+		</div>		
 
-		<div class="box-send-mail">
-			<div class="modal fade" id="modal-send-mail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">Gửi mail</h4>
-			      </div>
-			      <div class="modal-body">
-			      		<form>
-			      			<div class="form-group">
-			      				<input type="text" name="title_email" placeholder="Tiêu đề">
-			      			</div>
-
-			      			<div class="form-group">
-			      				<textarea name="content_email" rows="5" placeholder="Nội dung"></textarea>
-			      			</div>
-			      		
-			      		</form>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default"
-			         data-dismiss="modal">Thoát</button>
-			        <button type="button" class="btn btn-primary btn_modal_send_mail">Gửi</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		</div>
 	@endif
 	</div>
 	<script>
@@ -229,17 +133,9 @@
 				return;
 			} else {
 				getListCheckBox();	
-				$('#modal-send-mail').modal('show');
+				window.location = "mailto: " + list_member_checked.toString();
 			}
 			
-		})
-
-		$('.btn_modal_send_mail').click(function () {
-			if (list_member_checked == null || list_member_checked.length == 0) {
-				return;
-			} else {
-				
-			}
 		})
 
 		$('.btn_check_all').change(function () {

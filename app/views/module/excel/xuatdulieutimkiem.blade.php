@@ -16,9 +16,13 @@ function formsubmit() {
 	for ( i=1 ; i < j ; i++)
 		if ( myform.elements[i].type=='checkbox' && myform.elements[i].checked && (myform.elements[i].value =='field') )
 		{
-			rvalue += "'" + myform.elements[i].name + "',"
+			rvalue += myform.elements[i].name + ","
 		}
 	myform.listoffields.value=rvalue;
+	var listDienbien = '';
+	if (document.querySelector('input[name="dienbien"]:checked') != null) {
+		myform.listDienbien.value = document.querySelector('input[name="dienbien"]:checked').value;
+	}	
 	myform.submit();
 	}
 
@@ -41,6 +45,7 @@ function abc() {
 <form method="post" name="myform" action="{{Asset('in/xuatdulieu')}}">
 <input type="hidden" name="extractlist" value=" ;2190;2136;2162;2119;2137;2120;2198;2152;2197;2150;2151;2141;2101;2100;2167;2193;2102;2200;2110;2199;2113;2112;2111;2133;2138;2183;2104;2106;2105;2144;2107;2184;2153;2131;2179;2194;2132;2116;2126;2173;2134;2135;2115;2114;2174;2163;2171;2130;2172;2157;2160;2161;2156;2159;2158;2185;2148;2177;2165;2166;2140;2176;2175;2182;2181;2191;2125;2127;2128;2129;2180;2168;2154;2103;2139;2195;2108;2196;2123;2109;2118;2186;2146;2147;2187;2188;2189;2142;2143;2169;2170;2122;2121;2164;2192;2117;2149;2155;2178;2124;">
 <input type="hidden" name="listoffields">
+<input type="hidden" name="listDienbien">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr><td class="bodyline"><br>
 	<table cellpadding="4" cellspacing="1" border="0" class="forumline" align="center" style="margin-bottom: 20px">
@@ -61,13 +66,13 @@ function abc() {
 
 
 			<tr>
-				<td class="Row1"><input type="checkbox" name="sohieuchuan" value="field" checked=""></td>
+				<td class="Row1"><input type="checkbox" name="soyeu_tbl.sohieuchuan" value="field" checked=""></td>
                 <td class="Row2">Số hiệu công chức</td>
-                            				<td class="Row1"><input type="checkbox" name="ttd" value="field" checked=""></td>
+                            				<td class="Row1"><input type="checkbox" name="soyeu_tbl.ttd" value="field" checked=""></td>
                 <td class="Row2">Tên cán bộ</td>
-                            				<td class="Row1"><input type="checkbox" name="soyeu_tbl.ma_dvql" value="field" checked=""></td>
+                            				<td class="Row1"><input type="checkbox" name="dm_dv.dv" value="field" checked=""></td>
                 <td class="Row2">Đơn vị quản lý</td>
-                            				<td class="Row1"><input type="checkbox" name="soyeu_tbl.dvcha" value="field" checked=""></td>
+                            				<td class="Row1"><input type="checkbox" name="dm_dv.dv" value="field" checked=""></td>
                 <td class="Row2">Thuộc khoa viện</td>
                             				<td class="Row1"><input type="checkbox" name="qtcd_tbl.ma_hh" value="field" checked=""></td>
                 <td class="Row2">Học hàm </td>
@@ -99,7 +104,7 @@ function abc() {
 				<td class="Row2">Giới tính</td>
 			            				<td class="Row1"><input type="checkbox" name="ntns" value="field"></td>
 				<td class="Row2">Ngày tháng năm sinh</td>
-			            				<td class="Row1"><input type="checkbox" name="soyeu_tbl.ma_ns" value="field"></td>
+			            				<td class="Row1"><input type="checkbox" name="dm_ttp.ttp" value="field"></td>
 				<td class="Row2">Nơi sinh</td>
 			</tr>            				<tr><td class="Row1"><input type="checkbox" name="soyeu_tbl.ma_qq" value="field"></td>
 				<td class="Row2">Quê quán</td>
@@ -153,7 +158,7 @@ function abc() {
 				<td class="Row2">Trình độ lý luận chính trị</td>
 			</tr>            				<tr><td class="Row1"><input type="checkbox" name="dm_tdql.tdql" value="field"></td>
 				<td class="Row2">Trình độ quản lý nhà nước</td>
-			            				<td class="Row1"><input type="checkbox" name="soyeu_tbl.ma_ttsk" value="field"></td>
+			            				<td class="Row1"><input type="checkbox" name="dm_ttsk.ttsk" value="field"></td>
 				<td class="Row2">Tình trạng sức khoẻ</td>
 			            				<td class="Row1"><input type="checkbox" name="dm_nm.nm" value="field"></td>
 				<td class="Row2">Nhóm máu</td>
@@ -199,35 +204,34 @@ function abc() {
 				<td class="Row2">Chức vụ chính quyền hiện nay</td>
 			            				<td class="Row1"><input type="checkbox" name="qtcvkn_tbl.nbncvkn" value="field"></td>
 				<td class="Row2">Năm bổ nhiệm</td>
-			            				<td class="Row1"><input type="checkbox" name="qtcvkn_tbl.ma_dvqlcvkn" value="field"></td>
-				<td class="Row2">Đơn vị quản lý</td>
-			</tr>            			<tr>
             	<td colspan="10"><hr width="100%"></td>
             </tr>
             <tr>
             	<td colspan="10">Diễn biến:</td>
             </tr>
             <tr>
-            	<td class="Row1"><input type="radio" name="dienbien" value="luong"></td>
+            	<td class="Row1"><input type="radio" name="dienbien" class="dienbien" value="dienbienluong"></td>
                 <td class="Row2">Diễn biến lương</td>
-                <td class="Row1"><input type="radio" name="dienbien" value="qtdaotao"></td>
+                <td class="Row1"><input type="radio" name="dienbien" class="dienbien" value="quatrinhdaotao"></td>
                 <td class="Row2">Quá trình đào tạo</td>
 
 
 
-               		<td class="Row1"><input type="radio" name="dienbien" value="qtct"></td>
+               		<td class="Row1"><input type="radio" class="dienbien" name="dienbien" value="quatrinhcongtac"></td>
                 	<td class="Row2">Quá trình công tác</td>
 
-                	<td class="Row1"><input type="radio" name="dienbien" value="qtct1993"></td>
-                	<td class="Row2">Quá trình công tác (có trước năm 1993)</td>
+                	<!--<td class="Row1"><input type="radio" class="dienbien" name="dienbien" value="qtct1993"></td>
+                	<td class="Row2">Quá trình công tác (có trước năm 1993)</td>-->
             </tr>
 
             <tr>
-                    <td class="Row1"><input type="radio" name="dienbien" value="qtboiduong"></td>
+                    <td class="Row1"><input type="radio" name="dienbien"  class="dienbien"
+                    value="quatrinhboiduong"></td>
                 	<td class="Row2">Quá trình bồi dưỡng</td>
-               		<td class="Row1"><input type="radio" name="dienbien" value="khenthuong"></td>
+               		<td class="Row1"><input type="radio" name="dienbien" class="dienbien" 
+               		value="quatrinhkhenthuong"></td>
               		<td class="Row2">Khen thưởng</td>
-                	<td class="Row1"><input type="radio" name="dienbien" value="nuocngoaidaden"></td>
+                	<td class="Row1"><input type="radio" name="dienbien" class="dienbien" value="nuocngoaidaden"></td>
                 <td class="Row2">Nước ngòai đã đến</td>
             </tr>
             </tbody></table>

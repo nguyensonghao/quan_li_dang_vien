@@ -88,9 +88,18 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ Asset('print') }}">Biểu mẫu</a></li>
-                        <li><a href="#">Báo cáo</a></li>
-                        <li><a href="{{ Asset('add-file') }}">Thêm báo cáo</a></li>
+                        <li><a href="{{ Asset('bieumau1') }}">Báo cáo 1</a></li>
+                        <li><a href="{{ Asset('bieumau2') }}">Báo cáo 2</a></li>
+                        <li><a href="{{ Asset('bieumau3') }}">Báo cáo 3</a></li>
+                        <li><a href="{{ Asset('bieumau4') }}">Báo cáo 4</a></li>
+                        <li><a href="{{ Asset('bieumau5') }}">Báo cáo 5</a></li>
+                        <li><a href="{{ Asset('bieumau6') }}">Báo cáo 6</a></li>
+                        <li><a href="{{ Asset('bieumau7') }}">Báo cáo 7</a></li>
+                        <li><a href="{{ Asset('bieumau8') }}">Báo cáo 8</a></li>
+                        <li><a href="{{ Asset('bieumau9') }}">Báo cáo 9</a></li>
+                        <li><a href="{{ Asset('bieumau10') }}">Báo cáo 10</a></li>
+                        <li><a href="{{ Asset('bieumau11') }}">Báo cáo 11</a></li>
+                        <li><a href="{{ Asset('bieumau12') }}">Báo cáo 12</a></li>
                     </ul>
                 </li>
 

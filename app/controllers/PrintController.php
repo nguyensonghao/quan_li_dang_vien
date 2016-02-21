@@ -6,6 +6,7 @@
 
 		public function __construct () {
 			$this->beforeFilter('manager.school');
+			$this->exportData = new ExportDataController();
 		}
 
 		public function showPrint () {
@@ -53,27 +54,18 @@
 			
 		}
 
-		public function getFileInFolerPrint ($despath) {
-			$dh  = opendir($despath);
-			while (false !== ($filename = readdir($dh))) {
-				if ($filename != '.' && $filename != '..') {
-					$files[] = $filename;	
-				}
-			}
-
-			return $files;
-		}
-
 		public function actionPrintArrayByField () {
 			$listOfField = Input::get('listoffields');
+			$listDienbien = Input::get('listDienbien');			
 			$listOfField = substr($listOfField, 0, strlen($listOfField) - 1);
+			$listOfField = explode(',', $listOfField);
 			$searchController = new SearchController();
-			$data = $searchController->querySearchSimpleToPrint($listOfField);
-			// // $data = json_decode(json_encode($data), true);
-			// // $this->exportData = new ExportDataController();
-			// // $this->exportData->actionExportExcelFromArray($data);
-			// // print_r($data);
-			print_r($data);
+			$listDangvien = $searchController->querySearchSimpleToPrint($listOfField);
+			$data = [];
+			foreach ($listDangvien['all'] as $key => $value) {
+				$data[$key] = (array) $value;
+			}
+			$this->exportData->xuatDulieuDangvien($data, $listDienbien);
 		}
 
 	}

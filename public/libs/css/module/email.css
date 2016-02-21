@@ -1,0 +1,65 @@
+.container {
+			padding-top: 6px;
+		}
+
+		.panel-heading {
+			border-radius: 0;
+		}
+
+		.checkbox {
+			margin: 0 !important;
+		}
+
+		.panel {
+			height: 550px !important;
+			overflow: auto;
+			border-color: #ccc;
+    		border-top: 0;
+		}
+
+		.panel-body {
+			padding: 6px;
+		}
+
+		.stt {
+			font-weight: bold;
+		    font-size: 11px !important;
+		}
+
+		.title {
+			margin: 0 !important;
+		    background: #121213;
+		    padding: 10px;
+		    color: white;
+		}
+
+		.title img {
+			position: absolute;
+		    right: 150px;
+		    top: 10px;
+		}
+
+		.modal input, .modal textarea {
+			width: 100%;
+		    border: 0;
+		    border-bottom: 1px solid #ccc;
+		    outline: none !important;
+		}
+
+		.modal textarea {
+			border-bottom: none !important;
+		}
+
+		.modal .btn {
+			border-radius: 0 !important;
+		}
+
+		.modal-content {
+			border-radius: 0 !important;
+		}
+
+		.modal-header {
+			background: #337ab7;
+		    text-align: center;
+		    color: white;
+		}

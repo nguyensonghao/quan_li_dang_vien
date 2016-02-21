@@ -21,10 +21,14 @@
     </tr>
   </thead>
   <tbody>
+    @foreach ($dienbienluong as $key => $value)
     <tr>
-      <td>Tiếng Anh</td>
-      <td>Trình độ C</td>
-      <td></td>
+      <td>{{ $value['tgbd_dbl'] }} / {{ $value['tgkt_dbl'] }}</td>
+      <td>{{ $value['ten_ngach'] }}</td>
+      <td>{{ $value['bl_dbl'] }}</td>
+      <td>{{ $value['hsl'] }}</td>
+      <td>{{ $value['ptldh'] * 100 }}</td>
+      <td>{{ $value['ptldh'] * 100 }}</td>
       <td>
         <a class="btn btn-link btn-sm">
           <span class="glyphicon glyphicon-pencil"></span> 
@@ -38,14 +42,11 @@
         </a>
       </td>
     </tr>
+    @endforeach
   </tbody>
 </table>
 
 <div class="col-md-12 new">
-  <p class="title-text">
-    <span class="glyphicon glyphicon-plus"></span> 
-    Thêm mới dữ liệu
-  </p>
 
   <div class="col-md-6">
     <label>Ngạch</label>
@@ -128,10 +129,5 @@
     <label>Thông tin khác</label>
     <textarea class="form-control"></textarea>
   </div>
-  
-  <div class="col-md-12">
-    <center>
-      <button type="button" class="btn btn-primary btn-sm">Ghi lại</button>
-    </center>
-  </div>
+
 </div>
