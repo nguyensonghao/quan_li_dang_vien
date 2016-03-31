@@ -4,15 +4,31 @@
 @extends('template/layout/main')
 
 @section('title')
-    Danh sách tài khoản bị khóa
+    Danh sách admin
 @endsection
 
 @section('content-box')
-    @if (Session::get('result_delete_user') == 1)
+    @if (Session::get('result_unlock_user') == 1)
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>Thông báo!</strong> 
-            Xóa tài khoản {{Session::get('user_delete')}} thành công
+            tài khoản {{Session::get('user_unlock')}} đã được khôi phục
+        </div>
+    @endif
+
+    @if (Session::get('result_delete_user') == 1)
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Thông báo! </strong> 
+            đã xóa vĩnh viễn tài khoản {{Session::get('user_delete_forever')}}
+        </div>
+    @endif
+
+    @if (Session::has('delete-user'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Thông báo! </strong> 
+            Xóa tài khoản thành công
         </div>
     @endif
 
@@ -24,12 +40,12 @@
                         Tài khoản người dùng
                     </a>
                 </li>
-                <li>
+                <li class="menu-list-user-active">
                     <a href="{{ Asset('danh-sach-admin') }}">
                         Tài khoản admin
                     </a>
                 </li>
-                <li class="menu-list-user-active">
+                <li>
                     <a href="{{ Asset('danh-sach-tai-khoan-bi-khoa') }}">
                         Tài khoản bị khóa
                     </a>
@@ -39,7 +55,7 @@
         <div class="panel-body">
             <p class="bg-primary">
                 <span class="glyphicon glyphicon-th-list"></span>
-                Danh sách tài khoản bị khóa
+                Danh sách tài khoản admin
             </p>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -48,25 +64,17 @@
                             <th>Người dùng</th>
                             <th>Tên đầy đủ</th>
                             <th>Chức vụ</th>
-                            <th>Admin</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($list_user_block as $value)
+                    @foreach($list_admin as $value)
                         <tr>
                             <td>
                                 <b><a href="#">{{ $value->user }}</a></b>
                             </td>
                             <td>{{ $value->fullname }}</td>
-                            <td>{{ $value->detail }}</td>     
-                            <td>
-                                @if ($value->isadmin == 1)
-                                    Có
-                                @else
-                                    Không
-                                @endif
-                            </td>                       
+                            <td>{{ $value->detail }}</td>                            
                             <td>                                
                                 <a href="#" data-toggle="tooltip" 
                                 data-placement="top" title="Xem chi tiết">
@@ -81,7 +89,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {{ $list_user_block->links() }}
+                {{ $list_admin->links() }}
             </div>
         </div>
     </div>

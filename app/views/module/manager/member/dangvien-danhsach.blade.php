@@ -3,7 +3,7 @@
 @extends('template/layout/main')
 
 @section('title')
-    Quản lí tài khoản
+    Danh sách Đảng viên
 @endsection
 
 @section('content-box')
@@ -29,15 +29,15 @@
                     @foreach ($ds_dv as $value)
                         <tr>
                             <td><b>
-                                <a href="{{ Asset('dangvien/thongtin').'/'.$value->sohieuchuan }}" target="_blank">
+                                <a href="{{ Asset('thong-tin-dang-vien').'/'.$value->sohieuchuan }}" target="_blank">
                                 {{ $value->ttd }}
                                 </a>
                             </b></td>
                             <td>{{ $value->ntns }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->so_the_dv }}</td>
-                            <td>
-                                <a class="btn btn-link">Xóa</a>
+                            <td class="td-action">
+                                <a>Xóa</a>
                             </td>
                         </tr>
                     @endforeach

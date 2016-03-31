@@ -11,7 +11,7 @@
             Đảng viên là sinh viên
         </li>
         <li>
-            <a href="{{ Asset('dangvien/themcanbo') }}">Đảng viên là cán bộ</a>
+            <a href="{{ Asset('them-can-bo') }}">Đảng viên là cán bộ</a>
         </li>
     </ul>
 
@@ -481,7 +481,7 @@
                     style="margin-left: 0px !important;">
                         Kết nạp Đảng viên
                     </button>
-                    <button class="btn btn-success btn-sm">Reset</button>
+                    <button class="btn btn-success btn-sm">Làm mới</button>
                 </td>
             </tr>
 

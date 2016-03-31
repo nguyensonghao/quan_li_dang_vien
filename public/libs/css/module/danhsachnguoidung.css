@@ -1,0 +1,36 @@
+ .menu-list-user {
+        padding-left: 15px;
+    }
+
+    .menu-list-user li{
+        list-style: none;
+        padding: 10px 10px;
+        background: white;
+        color: #484747;
+        float: left;
+        border: 1px solid #ccc;
+    }
+
+    .menu-list-user li a{
+        color: #484747;        
+        text-decoration: none;
+    }
+
+    .panel-body {
+        clear: both;
+        padding-top: 0 !important;
+    }
+
+    .menu-list-user-active {
+        background: #337AB7 !important;
+        color: white !important;
+        border-color: #337AB7 !important;
+    }
+
+    .menu-list-user-active a {
+        color: white !important;
+    }
+
+    .bg-primary {
+        font-weight: 400 !important;
+    }

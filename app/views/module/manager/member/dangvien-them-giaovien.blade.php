@@ -2,13 +2,13 @@
 @extends('template/layout/main')
 
 @section('title')
-    Thêm Đảng viên là cán bộ
+    Thêm cán bộ Đảng viên
 @endsection
 
 @section('content-box')
     <ul class="menu-add-member">
         <li>
-            <a href="{{ Asset('dangvien/them') }}">Đảng viên là sinh viên</a>
+            <a href="{{ Asset('them-dang-vien') }}">Đảng viên là sinh viên</a>
         </li>
         <li class="menu-active">
             Đảng viên là cán bộ
@@ -452,7 +452,7 @@
             <tr>
                 <td>
                     <button class="btn btn-primary btn-sm">Kết nạp Đảng viên</button>
-                    <button class="btn btn-success btn-sm">Reset</button>
+                    <button class="btn btn-success btn-sm">Làm mới</button>
                 </td>
             </tr>
 

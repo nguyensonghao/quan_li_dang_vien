@@ -3,7 +3,7 @@
 class FormController extends BaseController {
 
 	public function __construct () {
-
+		$this->beforeFilter('manager.school');
 	}
 
 	public function bieumau1 () {

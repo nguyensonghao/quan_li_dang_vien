@@ -26,7 +26,7 @@
         line-height: 40px;
         text-align: center;
         border: 1px solid #ccc;
-        border-right: 0px;
+        border-left: 0px;
     }
 
     ul.menu-add-user li a {
@@ -67,15 +67,15 @@
             {{ $notify }}
         </div>
     @endif
-    
     <ul class="menu-add-user col-md-12 no-padding">
-        <li>
+        <li class="active">
             <a href="{{ Asset('them-quan-ly') }}">Thêm quản lý</a>
         </li>
-        <li class="active">
+        <li>
             <a href="{{ Asset('them-nguoi-dung') }}">Thêm người dùng</a>
         </li>
-    </ul>    
+    </ul>
+
     <form action="{{ Asset('nguoidung/them') }}" method="POST">
         <legend></legend>
         <div class="col-md-12">
@@ -98,11 +98,21 @@
                 <div class="form-group">
                     <label>Tên đầy đủ</label>
                     <input type="text" class="form-control" name="fullname">
-                </div>
+                </div>                                
             </div>
 
             <div class="col-md-6">
-                <label class="col-md-12 no-padding" style="margin-top: 10px">Quyền xóa :</label>
+                <div class="form-group">
+                    <label>Chức vụ</label>
+                    <select name="token" class="form-control" required="required">
+                        <option value="2">Cán bộ tác nghiệp viện</option>
+                        <option value="1">Lãnh đạo viện</option>
+                        <option value="4">Cán bộ tác nghiệp trường</option>
+                        <option value="3">Lãnh đạo trường</option>
+                    </select>
+                </div>
+                
+                <label class="col-md-12 no-padding">Quyền xóa :</label>
                 <div class="col-md-12 no-padding">
                     <div class="col-md-6 no-padding">
                         <div class="radio">
@@ -134,7 +144,7 @@
                     </select>
                 </div>
             </div>
-            <input type="hidden" name="isadmin" value="0">
+            <input type="hidden" name="isadmin" value="1">
         </div>
         
         <button type="submit" class="btn btn-primary btn-add-user">Thêm</button>

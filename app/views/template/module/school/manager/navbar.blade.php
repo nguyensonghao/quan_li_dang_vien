@@ -25,35 +25,32 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ Asset('timkiem') }}">Mặc định</a></li>
-                        <li><a href="{{ Asset('timkiem/nangcao') }}">Nâng cao</a></li>
+                        <li><a href="{{ Asset('tim-kiem-co-ban') }}">Mặc định</a></li>
+                        <li><a href="{{ Asset('tim-kiem-nang-cao') }}">Nâng cao</a></li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="glyphicon glyphicon-send"></span> 
-                        Quản lí Đảng viên
+                        Quản lý Đảng viên
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ Asset('dangvien/danhsach') }}">Danh sách Đảng viên</a>
+                            <a href="{{ Asset('danh-sach-dang-vien') }}">Danh sách Đảng viên</a>
                         </li>
                         <li>
-                            <a href="{{ Asset('dangvien/them') }}">Kết nạp Đảng viên</a>
+                            <a href="{{ Asset('them-dang-vien') }}">Kết nạp Đảng viên</a>
+                        </li>                        
+                        <li>
+                            <a href="{{ Asset('khai-tru-dang-vien') }}">Khai trừ và phục hổi đảng viên</a>
                         </li>
                         <li>
-                            <a href="{{ Asset('manager') }}">Quản lí Đảng phí</a>
+                            <a href="{{ Asset('danh-gia-dang-vien') }}">Đánh giá Đảng viên</a>
                         </li>
                         <li>
-                            <a href="{{ Asset('dangvien/khaitru') }}">Khai trừ và phục hổi đảng viên</a>
-                        </li>
-                        <li>
-                            <a href="{{ Asset('rate-member') }}">Đánh giá Đảng viên</a>
-                        </li>
-                        <li>
-                            <a href="{{ Asset('dangvien/chuyen') }}">Chuyển Đảng viên</a>
+                            <a href="{{ Asset('chuyen-dang-vien') }}">Chuyển Đảng viên</a>
                         </li>
                     </ul>
                 </li>
@@ -62,21 +59,20 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="glyphicon glyphicon-briefcase"></span> 
-                        Quản lí tài khoản
+                        Quản lý tài khoản
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ Asset('nguoidung/danhsach') }}">Danh sách tài khoản</a>
+                            <a href="{{ Asset('danh-sach-nguoi-dung') }}">Danh sách tài khoản</a>
                         </li>
                         <li>
-                            <a href="{{ Asset('nguoidung/them') }}">Thêm tài khoản</a>
-                        </li>
+                            <a href="{{ Asset('them-nguoi-dung') }}">Thêm tài khoản</a>
+                        </li>                        
                         <li>
-                            <a href="{{ Asset('nguoidung/khoa') }}">Xóa và khôi phục tài khoản</a>
-                        </li>
-                        <li>
-                            <a href="{{ Asset('nguoidung/doimatkhau') }}">Cấp lại mật khẩu</a>
+                            <a href="{{ Asset('cap-lai-mat-khau-nguoi-dung') }}">
+                                Cấp lại mật khẩu
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -87,35 +83,43 @@
                         In báo cáo
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ Asset('bieumau1') }}">Báo cáo 1</a></li>
-                        <li><a href="{{ Asset('bieumau2') }}">Báo cáo 2</a></li>
-                        <li><a href="{{ Asset('bieumau3') }}">Báo cáo 3</a></li>
-                        <li><a href="{{ Asset('bieumau4') }}">Báo cáo 4</a></li>
-                        <li><a href="{{ Asset('bieumau5') }}">Báo cáo 5</a></li>
-                        <li><a href="{{ Asset('bieumau6') }}">Báo cáo 6</a></li>
-                        <li><a href="{{ Asset('bieumau7') }}">Báo cáo 7</a></li>
-                        <li><a href="{{ Asset('bieumau8') }}">Báo cáo 8</a></li>
-                        <li><a href="{{ Asset('bieumau9') }}">Báo cáo 9</a></li>
-                        <li><a href="{{ Asset('bieumau10') }}">Báo cáo 10</a></li>
-                        <li><a href="{{ Asset('bieumau11') }}">Báo cáo 11</a></li>
-                        <li><a href="{{ Asset('bieumau12') }}">Báo cáo 12</a></li>
+                    <ul class="dropdown-menu list-report">
+                        <li style="float: left; width: 180px">
+                            <ul>
+                                <li><a href="{{ Asset('bieumau1') }}">Báo cáo 1</a></li>
+                                <li><a href="{{ Asset('bieumau2') }}">Báo cáo 2</a></li>
+                                <li><a href="{{ Asset('bieumau3') }}">Báo cáo 3</a></li>
+                                <li><a href="{{ Asset('bieumau4') }}">Báo cáo 4</a></li>
+                                <li><a href="{{ Asset('bieumau5') }}">Báo cáo 5</a></li>
+                                <li><a href="{{ Asset('bieumau6') }}">Báo cáo 6</a></li>        
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li><a href="{{ Asset('bieumau7') }}">Báo cáo 7</a></li>
+                                <li><a href="{{ Asset('bieumau8') }}">Báo cáo 8</a></li>
+                                <li><a href="{{ Asset('bieumau9') }}">Báo cáo 9</a></li>
+                                <li><a href="{{ Asset('bieumau10') }}">Báo cáo 10</a></li>
+                                <li><a href="{{ Asset('bieumau11') }}">Báo cáo 11</a></li>
+                                <li><a href="{{ Asset('bieumau12') }}">Báo cáo 12</a></li>   
+                            </ul>
+                        </li>                                                
                     </ul>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ Asset('list-notify') }}">
                         <span class="glyphicon glyphicon-bell"></span>
                         Tin nhắn
                         <span class="badge number-message">3</span>
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="{{ Asset('information') }}" class="btn-username">
-                        {{Auth::user()->username}}
+                        {{Auth::user()->fullname}}
                     </a>
                 </li>
                 <li class="dropdown">
@@ -123,10 +127,9 @@
                         <span class="glyphicon glyphicon-cog">
                     </a>
                     <ul class="dropdown-menu" style="right: 0">
-                        <li><a href="{{ Asset('information') }}">Xem thông tin</a></li>
-                        <li><a href="{{ Asset('change-information') }}">Chỉnh sửa thông tin</a></li>
-                        <li><a href="{{ Asset('change-password') }}">Đổi mật khẩu</a></li>
-                        <li><a href="{{ Asset('logout') }}">Đăng xuất</a></li>
+                        <li><a href="{{ Asset('thong-tin-ca-nhan') }}">Xem thông tin</a></li>
+                        <li><a href="{{ Asset('doi-mat-khau') }}">Đổi mật khẩu</a></li>
+                        <li><a href="{{ Asset('dang-xuat') }}">Đăng xuất</a></li>
                     </ul>
                 </li>
                 

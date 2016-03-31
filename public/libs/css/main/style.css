@@ -35,10 +35,8 @@
 .navbar-brand {
     width: 140px;
     border-right: 1px solid #ccc;
-    background-color: white !important;
-    font-family: initial;
-    font-weight: bold;
-    font-size: 18px;
+    background-color: white !important;    
+    font-size: 16px
 }
 
 .navbar-brand img {
@@ -130,8 +128,12 @@
     background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-.dropdown-menu li {
-    padding: 6px;
+.nav .dropdown-menu li {
+    padding: 3px 0px;
+}
+
+.nav .dropdown-menu {
+    padding: 0px;
 }
 
 .content-search li.list-group-item {
@@ -177,3 +179,29 @@
 }
 
 .container {width: 970px !important;}
+
+.no-padding {
+    padding: 0px;
+}
+
+.nav .list-report {
+    min-width: 360px;
+}
+
+.nav .list-report li {        
+    list-style: none;
+}
+
+.bg-primary {
+    font-weight: 500 !important;
+}
+
+.td-action {
+    padding-left: 20px !important; 
+    cursor: pointer
+}
+
+.stt {
+    width: 50px;
+    text-align: center;
+}

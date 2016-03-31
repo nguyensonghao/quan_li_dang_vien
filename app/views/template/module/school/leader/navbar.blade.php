@@ -25,8 +25,8 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ Asset('search') }}">Mặc định</a></li>
-                        <li><a href="{{ Asset('search-advance') }}">Nâng cao</a></li>
+                        <li><a href="{{ Asset('tim-kiem-co-ban') }}">Mặc định</a></li>
+                        <li><a href="{{ Asset('tim-kiem-nang-cao') }}">Nâng cao</a></li>
                     </ul>
                 </li>
                 
@@ -38,7 +38,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ Asset('manager') }}">Danh sách Đảng viên</a></li>
+                        <li><a href="{{ Asset('danh-sach-dang-vien') }}">Danh sách Đảng viên</a></li>
                     </ul>
                 </li>
                 <li>
@@ -59,10 +59,9 @@
                         <span class="glyphicon glyphicon-cog">
                     </a>
                     <ul class="dropdown-menu" style="right: 0">
-                        <li><a href="{{ Asset('information') }}">Xem thông tin</a></li>
-                        <li><a href="{{ Asset('change-information') }}">Chỉnh sửa thông tin</a></li>
-                        <li><a href="{{ Asset('change-password') }}">Đổi mật khẩu</a></li>
-                        <li><a href="{{ Asset('logout') }}">Đăng xuất</a></li>
+                        <li><a href="{{ Asset('thong-tin-ca-nha') }}">Xem thông tin</a></li>
+                        <li><a href="{{ Asset('doi-mat-khau') }}">Đổi mật khẩu</a></li>
+                        <li><a href="{{ Asset('dang-xuat') }}">Đăng xuất</a></li>
                     </ul>
                 </li>
             </ul>

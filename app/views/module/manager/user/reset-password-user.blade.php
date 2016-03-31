@@ -1,14 +1,4 @@
-<style type="text/css">
-	
-	input[type='password'], select {
-		width: 300px !important;
-	}
-
-	.search_select {
-		width: 300px !important;
-	}
-
-</style>
+{{ HTML::style('libs/css/module/caplaimatkhau.css') }}
 
 @extends('template/layout/main')
 
@@ -44,7 +34,7 @@
 		<strong>Chú ý :</strong> Chọn tài khoản người dùng và tìm kiếm trước khi đổi mật khẩu
 	</div>
 
-	<form action="{{ Asset('reset-password-user') }}" method="POST" role="form">
+	<form action="{{ Asset('cap-lai-mat-khau') }}" method="POST">
 	
 		<select name="user" class="form-control search_select" required="required">
 		@foreach ($list_user as $value)

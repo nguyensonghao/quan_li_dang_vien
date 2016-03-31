@@ -19,14 +19,13 @@ Route::get('/', function()
 // AcountController
 
 Route::controller('acount', 'AcountController');
-Route::get('/dangnhap', 'AcountController@showLogin');
-Route::get('/error', 'AcountController@showError');
-Route::get('/logout', 'AcountController@actionLogout');
-Route::get('/change-password', 'AcountController@showChangePassword');
-// Route::get('/dangvien/{sohieuchuan}', 'AcountController@showInformation');
-Route::get('/change-information', 'AcountController@showChangeInformation');
-Route::post('/login', 'AcountController@actionLogin');
-Route::post('/change-password', 'AcountController@actionChangePassword');
+Route::get('/dang-nhap', 'AcountController@showLogin');
+Route::get('/loi', 'AcountController@showError');
+Route::get('/dang-xuat', 'AcountController@actionLogout');
+Route::get('/doi-mat-khau', 'AcountController@showChangePassword');
+Route::get('/thong-tin-ca-nhan', 'AcountController@showChangeInformation');
+Route::post('/dang-nhap', 'AcountController@actionLogin');
+Route::post('/doi-mat-khau', 'AcountController@actionChangePassword');
 
 // PrintController
 
@@ -40,12 +39,12 @@ Route::post('in/xuatdulieu', 'PrintController@actionPrintArrayByField');
 // SearchController 
 
 Route::controller('search', 'SearchController');
-Route::get('timkiem', 'SearchController@showSearchSimple');
-Route::get('timkiem/nangcao', 'SearchController@showSearchAdvance');
-Route::get('timkiem/ketqua', 'SearchController@showSearchResult');
-Route::get('dangvien/indanhsach', 'SearchController@actionExportExcel');
-Route::get('dangvien/insocai', 'SearchController@actionPrintSocai');
-Route::get('dangvien/email', 'SearchController@actionSendMail');
+Route::get('tim-kiem-co-ban', 'SearchController@showSearchSimple');
+Route::get('tim-kiem-nang-cao', 'SearchController@showSearchAdvance');
+Route::get('ket-qua-tim-kiem', 'SearchController@showSearchResult');
+Route::get('in-danh-sach', 'SearchController@actionExportExcel');
+Route::get('in-so-cai', 'SearchController@actionPrintSocai');
+Route::get('gui-email', 'SearchController@actionSendMail');
 Route::get('export-dv', 'SearchController@exportListDv');
 Route::get('xuatdulieu/{shc}', 'SearchController@exportInformationOfOneMember');
 Route::post('timkiem/ketqua', 'SearchController@actionSearchSimple');
@@ -54,61 +53,44 @@ Route::post('timkiem/nangcao', 'SearchController@actionSearchAdvance');
 // ManagerUserController 
 
 Route::controller('manager-user', 'ManagerUserController');
-Route::get('nguoidung/danhsach', 'ManagerUserController@showListUser');
-Route::get('nguoidung/khoa', "ManagerUserController@showListUserBlock");
-Route::get('nguoidung/them', 'ManagerUserController@showAddUser');
-Route::get('information-user', 'ManagerUserController@showInformationUser');
-Route::get('nguoidung/doimatkhau', 'ManagerUserController@showResetUser');
-Route::get('delete-user/{user}', 'ManagerUserController@actionBlockUser');
-Route::get('un-block-user/{user}', 'ManagerUserController@unblockUser');
-Route::get('delete-user-forever/{user}', 'ManagerUserController@actiondeleteUser');
-Route::post('reset-password-user', 'ManagerUserController@actionResetPassword');
+Route::get('danh-sach-nguoi-dung', 'ManagerUserController@showListUser');
+Route::get('danh-sach-admin', "ManagerUserController@showListAdmin");
+Route::get('danh-sach-tai-khoan-bi-khoa', "ManagerUserController@showListUserBlock");
+Route::get('them-nguoi-dung', 'ManagerUserController@showAddUser');
+Route::get('them-quan-ly', 'ManagerUserController@showAddUserManager');
+Route::get('thong-tin-nguoi-dung', 'ManagerUserController@showInformationUser');
+Route::get('cap-lai-mat-khau-nguoi-dung', 'ManagerUserController@showResetUser');
+Route::get('khoa-nguoi-dung/{user}', 'ManagerUserController@actionBlockUser');
+Route::get('mo-khoa-nguoi-dung/{user}', 'ManagerUserController@unblockUser');
+Route::get('xoa-nguoi-dung/{id}', 'ManagerUserController@actionDeleteUser');
+Route::post('cap-lai-mat-khau', 'ManagerUserController@actionResetPassword');
+Route::post('them-nguoi-dung', 'ManagerUserController@actionAddUser');
 
 // ManagerMemberController 
 
 Route::controller('manager-member', 'ManagerMemberController');
-Route::get('dangvien/danhsach', 'ManagerMemberController@showListMember');
-Route::get('dangvien/them', 'ManagerMemberController@showAddMember');
-Route::get('dangvien/themcanbo', 'ManagerMemberController@showAddMemberTeacher');
-Route::get('dangvien/inthongtin/{shcc}', 'ManagerMemberController@showInformationMember');
-Route::get('dangvien/chuyen', 'ManagerMemberController@showChangedepartmentMember');
-Route::get('rate-member', 'ManagerMemberController@showRateMember');
-Route::get('dangvien/khaitru', 'ManagerMemberController@showexportMember');
-Route::get('dangvien/phuchoi/{shc}', 'ManagerMemberController@actionBackupMember');
-Route::get('dangvien/xuatdulieu', 'ManagerMemberController@showXuatDulieuTimKiem');
+Route::get('danh-sach-dang-vien', 'ManagerMemberController@showListMember');
+Route::get('them-dang-vien', array('before' => 'manager.school', 'uses' => 'ManagerMemberController@showAddMember'));
+Route::get('them-can-bo', array('before' => 'manager.school', 'uses' => 'ManagerMemberController@showAddMemberTeacher'));
+// Route::get('thong-tin-dang-vien/{shcc}', 'ManagerMemberController@showInformationMember');
+Route::get('chuyen-dang-vien', array('before' => 'manager.school', 'uses' => 'ManagerMemberController@showChangedepartmentMember'));
+Route::get('danh-gia-dang-vien', array('before' => 'manager.school', 'uses' => 'ManagerMemberController@showRateMember'));
+Route::get('khai-tru-dang-vien', array('before' => 'manager.school', 'uses' => 'ManagerMemberController@showExportMember'));
+Route::get('phuc-hoi-dang-vien/{shc}', 'ManagerMemberController@actionBackupMember');
+Route::get('xuat-du-lieu', 'ManagerMemberController@showXuatDulieuTimKiem');
 Route::post('change-department', 'ManagerMemberController@actionChangedepartmentMember');
-Route::post('dangvien/khaitru', 'ManagerMemberController@actionexportMember');
+Route::post('khai-tru-dang-vien', 'ManagerMemberController@actionExportMember');
 Route::post('dangvien/thongtincanbo', 'ManagerMemberController@getInformationtoJson');
-Route::post('/dangvien/them', 'ManagerMemberController@actionAddMember');
-Route::post('/dangvien/chibo', 'ManagerMemberController@actionGetChibo');
-
-// NotifyController 
-
-Route::controller('/notify', 'NotifyController');
-Route::get('/list-notify', 'NotifyController@showListNotify');
-Route::get('/detail-notify', 'NotifyController@showDetailNotify');
+Route::post('dangvien/them', 'ManagerMemberController@actionAddMember');
+Route::post('dangvien/chibo', 'ManagerMemberController@actionGetChibo');
 
 // ThongtinDangvienController
 
 Route::controller('thongtindangvien', 'ThongtinDangvienController');
-Route::get('dangvien/thongtin/{shc}', 'ThongtinDangvienController@showDangvien');
+Route::get('thong-tin-dang-vien/{shc}', 'ThongtinDangvienController@showDangvien');
 Route::get('dangvien/quatrinh/xoa/{qt_tbl}/{id}', 'ThongtinDangvienController@actionDeleteQuatrinh');
-
 Route::post('dangvien/thongtin/hienthi/chinhsua', 'ThongtinDangvienController@actionThongtinChinhsua');
 
-Route::get('demo', function () {
-	// $user = new User();
-	// print_r($user->test('sohieuchuan', 'ma_dt'));
-	$string = "'sohieuchuan', 'ttd'";
-	$string = ['sohieuchuan', 'ttd'];
-	$query = DB::table('soyeu_tbl')->select('ma_dt');
-	foreach ($string as $key => $value) {
-		$query = $query->addSelect($value);
-	}
-
-	$result = $query->first();
-	print_r($result);
-});
 
 Route::controller('form', 'FormController');
 Route::get('bieumau1', 'FormController@bieumau1');
@@ -123,7 +105,3 @@ Route::get('bieumau8', 'FormController@bieumau8');
 Route::get('bieumau9', 'FormController@bieumau9');
 Route::get('bieumau10', 'FormController@bieumau10');
 Route::get('bieumau11', 'FormController@bieumau11');
-
-
-
-

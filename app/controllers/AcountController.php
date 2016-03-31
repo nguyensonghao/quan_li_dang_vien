@@ -4,7 +4,7 @@
 
 		public function showLogin () {
 			if (Auth::check()) {
-				return Redirect::to('logout');
+				return Redirect::to('dang-xuat');
 			} else {
 				return View::make('module.acount.login');	
 			}
@@ -25,7 +25,7 @@
 
 		public function showError () {
 			if (Session::get('error') == null) {
-				return Redirect::to('timkiem');
+				return Redirect::to('tim-kiem-co-ban');
 			} else {
 				return View::make('module.error');	
 			}
@@ -34,11 +34,11 @@
 
 		public function actionLogin () {
 			$user = array (
-				'username' => Input::get('username'),
+				'user' => Input::get('username'),
 				'password' => Input::get('password')
 			);
 			$rules = array(
-				'username' => 'required',
+				'user' => 'required',
 				'password' => 'required'
 			);
 
@@ -49,25 +49,25 @@
 				if ($remember == 'on') {
 					if (Auth::attempt($user, true)) {
 						Session::flash('info-welcome', 1);
-						return Redirect::to('timkiem');
+						return Redirect::to('tim-kiem-co-ban');
 					} else {
 						Session::flash('error-login', -1);
-						return Redirect::to('dangnhap');
+						return Redirect::to('dang-nhap');
 					}
 				} else {
 
 					if (Auth::attempt($user)) {
 						Session::flash('info-welcome', 1);
-						return Redirect::to('timkiem');
+						return Redirect::to('tim-kiem-co-ban');
 					} else {
 						Session::flash('error-login', -1);
-						return Redirect::to('dangnhap');
+						return Redirect::to('dang-nhap');
 					}
 				}
 				
 			} else {
 				Session::flash('error-login', 3);
-				return Redirect::to('dangnhap');
+				return Redirect::to('dang-nhap');
 			}
 
 
@@ -76,7 +76,7 @@
 		public function actionLogout () {
 			Auth::logout();
 			Session::flash('error-login', 4);
-			return Redirect::to('login');
+			return Redirect::to('dang-nhap');
 		}
 
 		public function actionChangePassword () {

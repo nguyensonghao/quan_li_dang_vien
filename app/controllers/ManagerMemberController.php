@@ -4,11 +4,12 @@
 		public $user;
 
 		public function __construct () {
+			$this->beforeFilter('member');
 			$this->user = new User();
 		}
 
 		public function showListMember () {
-			$list['ds_dv'] = DB::table('soyeu_tbl')->whereNotNull('so_the_dv')->paginate(20);
+			$list['ds_dv'] = $this->user->listDangvien();
 			return View::make('module.manager.member.dangvien-danhsach', $list);
 		}
 
@@ -45,7 +46,7 @@
 			return View::make('module.manager.member.dangvien-them-giaovien', $list);	
 		}
 
-		public function showexportMember () {
+		public function showExportMember () {
 			$ds_dv = DB::table('soyeu_tbl')->get();
 			$ds_dv_kt = DB::table('soyeu_tbl')->where('status', 1)->get();
 			return View::make('module.manager.member.export-member')
@@ -66,11 +67,7 @@
 
 		public function showXuatDulieuTimKiem () {
 			return View::make('module.excel.xuatdulieutimkiem');
-		}
-
-		public function getInformation () {
-
-		}
+		}		
 
 		public function actionChangedepartmentMember () {
 			if (!Input::has('ds_dv') || !Input::has('dm_chibo')) {
@@ -82,7 +79,7 @@
 			}
 		}
 
-		public function actionexportMember () {
+		public function actionExportMember () {
 			DB::table('soyeu_tbl')->where('ttd', Input::get('ds_dv'))
 			->update(array('status' => 1));
 			return Redirect::back()->with('result-export-member', 1)

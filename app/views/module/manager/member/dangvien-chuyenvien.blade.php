@@ -1,21 +1,5 @@
-<style type="text/css">
-    select[name="ds_dv"] {
-        width: 400px;
-    }
+{{ HTML::style('libs/css/module/chuyendangvien.css') }}
 
-    .radio {
-        width: 50%;
-        float: left;
-    }
-
-    .dm_chibo {
-        height: 500px;
-        overflow: auto;
-        background: #d9edf7;
-        padding: 10px;
-    }
-
-</style>
 @extends('template/layout/main')
 
 @section('title')

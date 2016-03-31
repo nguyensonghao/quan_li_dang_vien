@@ -136,7 +136,7 @@ Route::filter('manager.school', function () {
 
 Route::filter('member', function () {
 	$token = Auth::user()->token;
-	if ($token != 5) {
+	if ($token == 5) {
 		Session::flash('error-login', 1);
 		return Redirect::to('login');
 	};

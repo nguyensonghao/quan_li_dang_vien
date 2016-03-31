@@ -3,7 +3,7 @@
 @extends('template/layout/main')
 
 @section('title')
-    Tìm kiếm Đảng viên
+    Tìm kiếm cơ bản
 @endsection
 
 @section('content-box')

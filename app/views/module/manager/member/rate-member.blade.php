@@ -1,16 +1,4 @@
-<style type="text/css">
-    input[name="ds_dv"] {
-        width: 300px !important;
-    }
-
-    form {
-        padding-top: 20px;
-    }
-
-    .btn {
-        border-radius: 0 !important;
-    }
-</style>
+{{ HTML::style('libs/css/module/danhgiadangvien.css') }}
 
 @extends('template/layout/main')
 

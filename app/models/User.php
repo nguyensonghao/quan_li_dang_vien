@@ -14,7 +14,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'cbuser';
 
 
 	/**
@@ -246,6 +246,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			// Thêm các trường thông tin cần lấy khi tìm kiếm
    			foreach ($listOfField as $key => $value) {
    				$query = $query->addSelect($value);
+   			}
+   			$token = Auth::user()->token;
+   			if ($token == 1 || $token == 2) {
+   				$query = $query->where('dm_dv.cha', Auth::user()->donvi);
    			}
 
    			$all    = $query->get();
@@ -638,5 +642,75 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			$data[$key] = (array) $value;
 		}
 		return $data;	
+	}
+
+	public function danhsachDonvi () {
+		return DB::table('dm_dv')->get();
+	}
+
+	public function danhsachVien () {
+		return DB::table('dm_dv')->where('cha', '02')->get();
+	}
+
+	public function addUser ($user) {
+		$newUser = new User();
+		if ($user['isadmin'] == 0) {
+			$newUser->user  = $user['username'];
+			$newUser->pass  = md5($user['password']);
+			$newUser->donvi = $user['donvi'];
+			$newUser->fullname = $user['fullname'];
+			$newUser->isadmin  = $user['isadmin'];
+			$newUser->isxoa    = $user['isxoa'];
+		} else {
+			$newUser->user  = $user['username'];
+			$newUser->donvi = $user['donvi'];
+			$newUser->token = $user['token'];
+			$newUser->password = Hash::make(($user['password']));
+			$newUser->fullname = $user['fullname'];
+			$newUser->isadmin  = $user['isadmin'];
+			$newUser->isxoa    = $user['isxoa'];
+		}
+
+		if ($newUser->save()) {
+			return true;
+		} else {
+			return false;
+		}	
+	}
+
+	public function resetPasswordUser ($username, $passwordNew) {
+		$user = DB::table('cbuser')->where('user', $username)->first();				
+		if (is_null($user)) {
+			return false;
+		} else {
+			$token = $user->token;		
+			if ($token >= 0 && $token <= 4) {
+				if (DB::table('cbuser')->where('user', $username)->update(array('password' => Hash::make($passwordNew)))) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				if (DB::table('cbuser')->where('user', $username)->update(array('password' => md5($passwordNew)))) {
+					return true;
+				} else {
+					return false;
+				}
+			}			
+		}			
+	}
+
+	public function listDangvien () {
+		$token = Auth::user()->token;
+		if ($token == 3 || $token == 4) {
+			return DB::table('soyeu_tbl')->whereNotNull('so_the_dv')->paginate(20);
+		} else if ($token == 1 || $token == 2) {
+			$donvi = Auth::user()->donvi;
+			return DB::table('soyeu_tbl')->whereNotNull('so_the_dv')
+			->join('dm_dv', 'dm_dv.ma_dv', '=', 'soyeu_tbl.ma_dvql')
+			->where('dm_dv.cha', $donvi)->paginate(20);
+		} else {
+
+		}
 	}
 }

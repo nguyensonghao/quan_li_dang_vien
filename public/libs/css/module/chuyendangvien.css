@@ -1,0 +1,15 @@
+select[name="ds_dv"] {
+    width: 400px;
+}
+
+.radio {
+    width: 50%;
+    float: left;
+}
+
+.dm_chibo {
+    height: 500px;
+    overflow: auto;
+    background: #d9edf7;
+    padding: 10px;
+}

@@ -42,7 +42,7 @@
         </div>
     @endif
 	
-    <form action="{{ Asset('change-password') }}" method="POST" role="form" class="col-md-6">
+    <form action="{{ Asset('doi-mat-khau') }}" method="POST" role="form" class="col-md-6">
         <legend>Đổi mật khẩu người dùng</legend>
     
         <div class="form-group">

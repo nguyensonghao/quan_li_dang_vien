@@ -10,14 +10,14 @@
     {{ HTML::script('libs/bootstrap/js/bootstrap.js') }}
 </head>
 <body style="background: url('image/noise.png')">
-	<h1>Hệ thống quản lí Đảng viên</h1>
-    <h3>Trường đại học Bách Khoa Hà Nội</h3>
+	<h1 style="margin-top: 0px">Hệ thống quản lý Đảng viên</h1>
+    <h3 style="margin-bottom: 0px">Trường đại học Bách Khoa Hà Nội</h3>
     <div class="row">
-        <form action=" {{Asset('login')}} " method="POST">
+        <form action=" {{Asset('dang-nhap')}} " method="POST">
             <div class="form-login col-md-4 col-md-offset-4">
                 <div class="panel">
-                    <div class="panel-heading">
-                        <h3>ĐĂNG NHẬP</h3>
+                    <div class="panel-heading" style="padding: 1px">
+                        <h3 style="font-size: 20px; line-height: 16px">ĐĂNG NHẬP</h3>
                     </div>
                     
                     @if(Session::get('error-login') == -1)

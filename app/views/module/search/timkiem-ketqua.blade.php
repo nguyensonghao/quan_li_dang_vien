@@ -3,7 +3,7 @@
 @extends('template/layout/main')
 
 @section('title')
-    Tìm kiếm Đảng viên
+    Kết quả tìm kiếm
 @endsection
 
 @section('content-box')
@@ -19,29 +19,29 @@
                 <div class="btn-group">
                     @if ($type == 0)
                     <a class="btn btn-primary btn-show-search" 
-                    href="{{ Asset('timkiem') }}">
+                    href="{{ Asset('tim-kiem-co-ban') }}">
                         Tìm kiếm mới
                     </a>
                     @else
                     <a class="btn btn-primary btn-show-search" 
-                    href="{{ Asset('timkiem/nangcao') }}">
+                    href="{{ Asset('tim-kiem-nang-cao') }}">
                         Tìm kiếm mới
                     </a>
                     @endif
                     <a type="button" class="btn btn-custom btn-sm" 
-                    href="{{ Asset('dangvien/indanhsach') }}">
+                    href="{{ Asset('in-danh-sach') }}">
                         In danh sách
                     </a>
                     <a type="button" class="btn btn-custom btn-sm"
-                    href="{{ Asset('dangvien/email') }}" target="_blank">
+                    href="{{ Asset('gui-email') }}" target="_blank">
                         Gửi email
                     </a>
                     <a type="button" class="btn btn-custom btn-sm"
-                    href="{{ Asset('dangvien/insocai') }}">
+                    href="{{ Asset('in-so-cai') }}">
                         In sổ cái
                     </button>
 
-                    <a href="{{Asset('dangvien/xuatdulieu')}}" class="btn btn-custom btn-sm" target="_blank">
+                    <a href="{{Asset('xuat-du-lieu')}}" class="btn btn-custom btn-sm" target="_blank">
                         Xuất dữ liệu
                     </a>
                 </div>
@@ -67,7 +67,7 @@
                         <td>
                             <b>
                                 <a 
-                                href="{{ Asset('dangvien/thongtin').'/'. $value->sohieuchuan }}">
+                                href="{{ Asset('thong-tin-dang-vien').'/'. $value->sohieuchuan }}">
                                     {{ $value->ttd }}
                                 </a>
                             </b>

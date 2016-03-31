@@ -1,0 +1,7 @@
+input[type='password'], select {
+	width: 300px !important;
+}
+
+.search_select {
+	width: 300px !important;
+}

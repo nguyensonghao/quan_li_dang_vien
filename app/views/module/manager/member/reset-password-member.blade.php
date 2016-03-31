@@ -1,11 +1,3 @@
-<style type="text/css">
-	
-	input[type='password'] {
-		width: 300px !important;
-	}
-
-</style>
-
 @extends('template/layout/main')
 
 @section('title')
@@ -35,7 +27,7 @@
 	
 		<div class="form-group">
 			<label for="">Mật khẩu mới</label>
-			<input type="password" class="form-control" placeholder="Mật khẩu">
+			<input type="password" class="form-control" placeholder="Mật khẩu" style="width: 300px !important">
 		</div>
 	
 		<div class="form-group">

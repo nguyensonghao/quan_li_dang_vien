@@ -7,6 +7,7 @@
 		public $servicesController;
 
 		public function __construct () {
+			$this->beforeFilter('member');
 			$this->user = new User();
 			$this->servicesController = new ServicesController();
 			$this->exportData = new ExportDataController();
@@ -53,7 +54,7 @@
 			$condition = Input::all();
 			Session::set('conditionSearchSimple', $condition);
 			Session::forget('conditionSearchAdvance');
-			return Redirect::to('timkiem/ketqua');
+			return Redirect::to('ket-qua-tim-kiem');
 		}
 
 		// Hàm gửi email

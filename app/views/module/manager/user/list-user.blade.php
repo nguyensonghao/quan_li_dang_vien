@@ -1,42 +1,10 @@
 {{ HTML::style('libs/css/module/manager.css') }}
-<style type="text/css">
-    
-    .menu-list-user {
-        padding-left: 15px;
-    }
-
-    .menu-list-user li{
-        list-style: none;
-        padding: 10px 10px;
-        background: white;
-        color: #484747;
-        font-weight: bold;
-        float: left;
-        margin-right: 1px;
-        border: 1px solid #ccc;
-    }
-
-    .menu-list-user li a{
-        color: #484747 !important;
-        text-decoration: none;
-    }
-
-    .panel-body {
-        clear: both;
-        padding-top: 0 !important;
-    }
-
-    .menu-list-user-active {
-        background: #337AB7 !important;
-        color: white !important;
-    }
-
-</style>
+{{ HTML::style('libs/css/module/danhsachnguoidung.css') }}
 
 @extends('template/layout/main')
 
 @section('title')
-    Quản lí tài khoản
+    Danh sách người dùng
 @endsection
 
 @section('content-box')
@@ -51,9 +19,18 @@
     <div class="panel panel-default">
         <div class="panel-header">
             <ul class="menu-list-user">
-                <li class="menu-list-user-active">Tài khoản hoạt động</li>
+                <li class="menu-list-user-active">
+                    <a href="{{ Asset('danh-sach-nguoi-dung') }}">
+                        Tài khoản người dùng
+                    </a>
+                </li>
                 <li>
-                    <a href="{{ Asset('list-user-block') }}">
+                    <a href="{{ Asset('danh-sach-admin') }}">
+                        Tài khoản admin
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ Asset('danh-sach-tai-khoan-bi-khoa') }}">
                         Tài khoản bị khóa
                     </a>
                 </li>
@@ -62,7 +39,7 @@
         <div class="panel-body">
             <p class="bg-primary">
                 <span class="glyphicon glyphicon-th-list"></span>
-                Danh sách tài khoản đang hoạt động
+                Danh sách tài khoản người dùng
             </p>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -71,28 +48,18 @@
                             <th>Người dùng</th>
                             <th>Tên đầy đủ</th>
                             <th>Chức vụ</th>
-                            <th>Admin</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($list_user as $value)
                         <tr>
-                            <td>{{ $value->user }}</td>
+                            <td>
+                                <b><a href="#">{{ $value->user }}</a></b>
+                            </td>
                             <td>{{ $value->fullname }}</td>
                             <td>{{ $value->detail }}</td>
-                            <td>
-                                @if ($value->isadmin == 1)
-                                    Có
-                                @else
-                                    Không
-                                @endif
-                            </td>
-                            <td>
-                                <a href="#" data-toggle="tooltip" 
-                                data-placement="left" title="Chỉnh sửa tài khoản">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
+                            <td>                                
                                 <a href="#" data-toggle="tooltip" 
                                 data-placement="top" title="Xem chi tiết">
                                     <span class="glyphicon glyphicon-ok"></span>

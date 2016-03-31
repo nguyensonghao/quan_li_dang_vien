@@ -47,23 +47,18 @@
         @if (Session::get('info-welcome') == 1)
         <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4>Bạn đang đăng nhập với quyền
+            <strong>Thông báo!</strong><span> bạn đang đăng nhập với quyền</span>
             @if (Auth::user()->token == 1)
-                Lãnh đạo khoa viện
-                
+                <b>Lãnh đạo khoa viện</b>                
             @elseif (Auth::user()->token == 2)
-                Cán bộ tác nhiệm khoa viện
-
+                <b>Cán bộ tác nhiệm khoa viện</b>
             @elseif (Auth::user()->token == 3)
-                Lãnh đạo trường
-
+                <b>Lãnh đạo trường</b>
             @elseif (Auth::user()->token == 4)
-                Cán bộ tác nhiệm trường
-
+                <b>Cán bộ tác nhiệm trường</b>
             @else
-                Thành viên
+                <b>Thành viên</b>
             @endif            
-            </h4>
         </div>
 
         @endif
