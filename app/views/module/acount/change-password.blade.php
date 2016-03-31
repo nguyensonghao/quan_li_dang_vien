@@ -7,7 +7,8 @@
 @endsection
 
 @section('content-box')
-
+    
+    <div class="clear" style="margin-bottom: 10px"></div>
     @if (Session::get('success-change-password') == 1)
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -28,13 +29,13 @@
             <strong>Thông báo!</strong>
             <p>Mật khẩu mới không trùng nhau</p>
         </div>
-    @elseif(Session::get('error-change-password') == 2)
+    @elseif (Session::get('error-change-password') == 2)
         <div class="alert alert-warning">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>Thông báo!</strong>
             <p>Mật khẩu cũ không khớp</p>
         </div>
-    @elseif(Session::get('error-change-password') == 3)
+    @elseif (Session::get('error-change-password') == 3)
         <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>Thông báo!</strong>

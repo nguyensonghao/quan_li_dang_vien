@@ -259,6 +259,34 @@ class ServicesController {
 		return $result;
 	}
 
+	public static function typeOfUser () {
+		if (!Auth::check()) {
+			return 'Chưa đăng nhập';
+		} else {
+			$token = Auth::user()->token;
+			switch ($token) {
+				case 1:
+					return 'Lãnh đạo khoa viện';
+					break;
+
+				case 2:
+					return 'Cán bộ tác nghiệp khoa viện';
+					break;
+
+				case 3:
+					return 'Lãnh đạo trường';
+					break;
+
+				case 4:
+					return 'Cán bộ tác nghiệp trường';
+					break;
+
+				default:
+					return 'Đảng viên';
+					break;
+			}
+		}
+	}
 
 }
 

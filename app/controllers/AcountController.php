@@ -20,7 +20,12 @@
 		}
 
 		public function showChangeInformation () {
-			return View::make('module.acount.change-information');
+			$list['user']  = Auth::user();			
+			$list['chucvu'] = ServicesController::typeOfUser();
+			if ($list['user']->token == 1 || $list['user']->token == 2) {
+				$list['donvi'] = DB::table('dm_dv')->where('ma_dv', $list['user']->donvi)->first();
+			}
+			return View::make('module.acount.change-information', $list);
 		}
 
 		public function showError () {
@@ -34,8 +39,8 @@
 
 		public function actionLogin () {
 			$user = array (
-				'user' => Input::get('username'),
-				'password' => Input::get('password')
+				'user' => trim(Input::get('username')),
+				'password' => trim(Input::get('password'))
 			);
 			$rules = array(
 				'user' => 'required',
@@ -43,8 +48,7 @@
 			);
 
 			$validator = Validator::make($user, $rules);
-			if(!$validator->fails()){
-				// check user remember login
+			if(!$validator->fails()){				
 				$remember = Input::get('remember');
 				if ($remember == 'on') {
 					if (Auth::attempt($user, true)) {
@@ -96,27 +100,40 @@
 			if (!$validator->fails()) {
 				// Check password confirm
 				if ($passwordReset != $passwordConfirm) {
-					return Redirect::to('change-password')->with('error-change-password', 1);
+					return Redirect::back()->with('error-change-password', 1);
 				} else {
 					// Check password old 
 					if (Hash::check($passwordOld, Auth::user()->password)) {
 						$user = Auth::user();
 						$user->password = Hash::make($passwordReset);
 						if ($user->save()) {
-							return Redirect::to('change-password')->with('success-change-password', 1);
+							return Redirect::back()->with('success-change-password', 1);
 						} else {
-							return Redirect::to('change-password')->with('error-change-password', 3);
+							return Redirect::back()->with('error-change-password', 3);
 						}
 					} else {
-						return Redirect::to('change-password')->with('error-change-password', 2);
+						return Redirect::back()->with('error-change-password', 2);
 					}	
 				}
 				
 			} else {
-				return Redirect::to('change-password')->with('error-change-password', -1);
-			}	
+				return Redirect::back()->with('error-change-password', -1);
+			}				
+		}
 
-			
+		public function actionChangeInformation () {
+			$user = Input::get('user');
+			$fullname = Input::get('fullname');
+			if ($user == null || $fullname == null || $user == '' || $fullname == '') {
+				return Redirect::back()->with('error', 'Không được để trống các trường');
+			} else {
+				if (DB::table('cbuser')->where('id', Input::get('id'))
+				->update(array('user' => $user, 'fullname' => $fullname))) {
+					return Redirect::back()->with('notify', 'Thay đổi thông tin thành công');
+				} else {
+					return Redirect::back()->with('error', 'Có lỗi trong quá trình xử lý');
+				}
+			}
 		}
 
 

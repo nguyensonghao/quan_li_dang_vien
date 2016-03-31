@@ -26,6 +26,7 @@ Route::get('/doi-mat-khau', 'AcountController@showChangePassword');
 Route::get('/thong-tin-ca-nhan', 'AcountController@showChangeInformation');
 Route::post('/dang-nhap', 'AcountController@actionLogin');
 Route::post('/doi-mat-khau', 'AcountController@actionChangePassword');
+Route::post('/thay-doi-thong-tin', 'AcountController@actionChangeInformation');
 
 // PrintController
 
